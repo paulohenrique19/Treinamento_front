@@ -299,3 +299,550 @@
 .grid-content-2 > div {
     background-color: cornflowerblue;
 }
+
+.grid-content-3 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    align-content: end;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-content-3 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-content-4 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    align-content: space-around;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-content-4 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-content-5 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    align-content: space-between;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-content-5 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-content-6 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    align-content: space-evenly;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-content-6 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-content-7 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    justify-content: center;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-content-7 > div {
+    background-color: cornflowerblue;
+}
+
+
+.grid-content-8 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    justify-content: end;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-content-8 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-content-9 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    justify-content: space-around;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-content-9 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-content-10 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    justify-content: space-between;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-content-10 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-content-11 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    justify-content: space-evenly;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-content-11 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-content-12 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    place-content: center;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-content-12 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-content-13 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    place-content: space-around;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-content-13 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-content-14 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    place-content: space-between;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-content-14 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-content-15 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    place-content: space-evenly;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-content-15 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-items-0 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    align-items: stretch;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-items-0 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-items-1 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    align-items: start;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-items-1 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-items-2 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    align-items: center;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-items-2 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-items-3 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    align-items: end;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-items-3 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-items-4 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    align-items: baseline;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-items-4 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-items-5 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    justify-items: start;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-items-5 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-items-6 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    justify-items: center;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-items-6 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-items-7 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    justify-items: end;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-items-7 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-items-8 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    place-items: start;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-items-8 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-items-9 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    place-items: center;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-items-9 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-items-10 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    place-items: end;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-items-10 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-self-1 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-self-1 div:nth-child(2) {
+    align-self: start;
+}
+
+.grid-self-1 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-self-2 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-self-2 div:nth-child(2) {
+    justify-self: start;
+}
+
+.grid-self-2 > div {
+    background-color: cornflowerblue;
+}
+
+.grid-self-3 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+
+
+}
+
+.grid-self-3 div:nth-child(2) {
+    place-self: start;
+}
+
+.grid-self-3 > div {
+    background-color: cornflowerblue;
+}
