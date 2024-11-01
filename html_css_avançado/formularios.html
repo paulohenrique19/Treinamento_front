@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>HTML Forms</h1>
+
+    <p>Serve para capturar dados</p>
+
+    <form action="">
+        <input type="text" name="nome">
+        <button>submit</button>
+    </form>
+
+    <h1>Button, atributos:</h1>
+    <h2>type</h2>
+    <p>Por padrão, um botão é do tipo submit quando estiver dentro de um form</p>
+    <form action="">
+        <p>Botão com type submit:</p>
+        <button type="submit">submit</button>
+        <p>reset: reseta o input</p>
+        <p>button: não envia o formulário, mas faz alguma ação</p>
+        <input type="text" name="nome">
+        <button type="submit">submit</button>
+        <button type="reset">reset</button>
+        <button type="button">button</button>
+        <p>autofocus: coloca uma marcação no botão depois de apertá-lo</p>
+        <input type="text" name="nome">
+        <button type="submit" autofocus>submit</button>
+        <p>disabled: desativa o botão</p>
+        <button disabled>disabled</button>
+        <p>name: atribui um nome ao botao</p>
+        <p>value: atribui um valor ao botao para ser enviado ao formulario</p>
+        <input type="text" name="nome">
+        <button name="botao1" value="valor_do_botao" type="submit">name e value</button>
+    </form>
+
+    <h1>Input, atributos:</h1>
+    <h2>Input Text</h2>
+    <form>
+
+        <p>name: o valor do input ao enviar o formulário</p>
+        <p>type: define o tipo de dado do input</p>
+
+        <p>atributos gerais são atributos em que muitos deles poderão passar por vários elementos
+        </p>
+        
+        <p>value: coloca um valor por padrão no input</p>
+        <p>autocomplete: tenta completar o elemento dentro de acordo com o que está sendo inserido</p>
+        <p>size: altera o tamanho do input</p>
+        <p>autofocus: coloca um destaque no input após alguma ação</p>
+        <p>disabled: desabilita o botão</p>
+        <p>readonly: permite apenas leitura do campo e não permite alterações</p>
+        <p>form: serve para linkar algum formulario a algum input</p>
+        <p>required: requere que o campo seja preenchido antes de submeter</p>
+        <p>placeholder: coloca um texto no fundo do campo antes dele ser preenchido</p>
+
+        <form id="myform">
+            <button>submit</button>
+        </form>
+
+        <input 
+            type="text" 
+            name="nome"
+            autocomplete="new-password"
+            size="10"
+            autofocus
+            form="myform"
+            required
+            placeholder="Type here"
+        >
+    </form>
+
+    <h2>Input Number</h2>
+    <p>type: number -> aceita apenas números</p>
+    <p>max & min: define um limite númerico que o input aceita</p>
+    <p>step: pula os números disponíveis, ex, se o step for 2 e temos números de 0 a 10, isso quer dizer que ele só irá aceitar números pares de 0 a 10</p>
+    <form>
+        <input type="number"
+            min="0"
+            max="10"
+            step="2"
+        >
+        <button type="submit">submit</button>
+    </form>
+    <h2>Input Email</h2>
+
+    <p>Por padrão, inputs do tipo email requerem que pelomenos um @ seja colocado </p>
+    <p>multiple: permite que multiplos emails sejam enviados no formulário separados por vírgula</p>
+    <p>minlenght & maxlength: define um limite para o tamanho do e-mail</p>
+    <p>pattern: expressão regular para validar o campo, ex se eu colocar pattern=".+gmail\.com", ele vai aceitar somente emails que terminam com @gmail.com</p>
+    <p>title: mensagem de "erro" no input</p>
+
+    <form action="">
+        <input 
+            type="email" 
+            name="email"
+            maxlength="255"
+            minlength="2"
+            pattern=".+@gmail\.com"
+            required
+            title="Apenas emails com @gmail"
+        >
+        <button>submit</button>
+    </form>
+   
+
+
+</body>
+</html>
