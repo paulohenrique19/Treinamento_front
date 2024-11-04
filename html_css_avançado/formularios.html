@@ -108,7 +108,156 @@
         <button>submit</button>
     </form>
    
+    <h2>Input Password</h2>
 
+    <p>Por padrão, esconde o que está sendo digitado</p>
+    <p>"inputmode: numeric" serve para abrir um teclado númerico de digitação de senhas (apenas para celulares)</p>
+    <p>podemos usar o pattern também para forçar o usuário a criar uma senha mais segura</p>
+    <form action="">
+        <input 
+            type="password"
+            pattern="[0-9a-zA-Z]{4,12}"
+        >
+        <button>Submit</button>
+    </form>
+    
+
+    <h2>Input File</h2>
+
+    <p>Serve para enviar arquivos</p>
+    <p>No form, precisamos colocar o atributo e valor: enctype="multipart/form-data"</p>
+    <p>multiple: serve para enviar vários arquivos</p>
+    <p>accept: serve para limitar os tipos de arquivos que o formulário aceita</p>
+
+    <form enctype="multipart/form-data">
+        <input type="file" name="arquivo">
+        <button>Submit</button>
+    </form>
+
+    <h2>Input Range</h2>
+    <p>Controle para selecionar valor numérico</p>
+    <p>step: serve para definir valores a cada número de passos definidos, ex: step: 20, pula de 20 em 20</p>
+
+    <form>
+        <input type="range" name="total" step="20">
+        <button>Submit</button>
+    </form>
+
+    <h2>Input Color</h2>
+    <p>Serve para enviar cores no formulário</p>
+    <p>podemos usar o datalist para pré-definir uma lista de cores linkando um id da lista ao input com o atributo list</p>
+
+    <form>
+        <datalist id="colorpicker">
+            <option value="#FCAC00"></option>
+            <option value="#0FACAA"></option>
+        </datalist>
+        <input type="color" name="color" list="colorpicker">
+        <button>Submit</button>
+    </form>
+
+    <h2>Input Checkbox</h2>
+
+    <p>Input por caixas de marcação</p>
+    <p>checked: deixa uma marcação em algum campo por padrão</p>
+
+    <form>
+        <input type="checkbox" name="input" value="1">
+        <input type="checkbox" name="input" value="2">
+        <input type="checkbox" name="input" value="3" checked>
+        <button>Submit</button>
+
+    </form>
+    
+    <h2>Input Radio</h2>
+
+    <p>Semelhante ao checkbox</p>
+    <p>Projetado para selecionar uma única opção de um grupo de opções</p>
+    <p>Se trocarmos o valor do atributo name, podemos selecionar mais opções</p>
+    <p>Checked funciona aqui também</p>
+
+    <form>
+        <input type="radio" name="input" value="1">
+        <input type="radio" name="input" value="2">
+        <input type="radio" name="input" value="3" checked>
+        <button>Submit</button>
+    </form>
+
+    <h2>Input Hidden</h2>
+    <p>Esconde um input, mas pode enviar dados</p>
+    <form>
+        <input type="hidden" name="id" value="123456">
+        <button>Submit</button>
+    </form>
+
+    <h1>Label</h1>
+
+    <p>Serve para nomear um campo, quando clicamos na label, o campo gera uma marcação</p>
+    <p>for: nomeia um campo</p>
+
+    <form>
+        <label for="nome">Nome</label>
+        <input 
+            id="nome"
+            type="text"
+            name="nome"
+            placeholder="Coloque seu nome"
+        >
+        <button>Submit</button>
+    </form>
+
+    <h1>Text area</h1>
+
+    <p>Cria uma área de texto</p>
+
+    <p>Podemos definir tamanho com as propriedades rows e cols e também permitir wrap</p>
+    <p>Podemos inserir também as propriedades placeholderm disbled e required</p>
+
+    <form>
+        <textarea 
+            name="texto"
+            rows="5"
+            cols="20"
+            wrap="on"
+        >
+        </textarea>
+        <button>Submit</button>
+    </form>
+
+    <h1>Select</h1>
+
+    <p>Serve para selecionar elementos de uma lista, ela pode ser agrupada com o optgroup ou não</p>
+    <p>multiple: permite que multiplos valores sejam selecionados</p>
+    <p>size: determina um tamanho</p>
+
+    <form>
+        <select name="car" multiple size="6">
+            <optgroup label="Label 1">
+                <option label="opt1.1" value="1">
+                <option label="opt1.2" value="2">
+                <option label="opt1.3" value="3">
+            </optgroup>
+            <optgroup label="Label 2">
+                <option label="opt2.1" value="1">
+                <option label="opt2.2" value="2">
+                <option value="3">opt2.3</option>
+            </optgroup>
+        </select>
+        <button>Submit</button>
+    </form>
+
+    <h1>Fieldset</h1>
+    <p>Agrupamento de campos</p>
+
+    <form>
+        <fieldset>
+            <legend>Contato</legend>
+
+            <input type="text" name="nome">
+            <input type="email" name="email">
+        </fieldset>
+        <button>Enviar</button>
+    </form>
 
 </body>
 </html>
