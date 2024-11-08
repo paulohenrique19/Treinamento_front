@@ -98,6 +98,11 @@ ul[role="lista"] {
     list-style: none;
 }
 
+img {
+    max-width: 100%;
+    display: inline-block;
+}
+
 /*Aplicando a responsividade, todos os elementos com width >= 80em (1280px) terão seus tamanhos de fonte aumentados*/
 @media (width >= 80em) {
     :root {
