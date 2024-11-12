@@ -3,6 +3,10 @@ import '../styles/global.css';
 import '../styles/CSS_Transitions.css';
 
 const CSS_Transitions = () => {
+
+  
+
+
   return (
     <div>
         <div className="transitions flex-to-column g-0.5 px-1">
@@ -45,6 +49,37 @@ const CSS_Transitions = () => {
               OBS: Em multiplas transições com multiplas durações, o CSS entende onde precisa colocar
               o tempo específico da transição específica com base na ordem em que foram declarados em transition-property e transition-duration
             </p>
+            
+            <h2 className="f-1">
+              transition-timing-function
+            </h2>
+            <p className="f-1">
+              Aplica uma aceleração ou desaceleração da transição do início ao fim
+            </p>
+
+            <h2 className="f-1">
+              Propriedades do transition-timing-function
+            </h2>
+            <p className="f-1">
+              transition-timing-function: linear; não aplica mudanças na velocidade da transição
+            </p>
+            <p className="f-1">transition-timing-function: ease-in; chegada suave</p>
+            <p className="f-1">transition-timing-function: ease-out; saída suave</p>
+            <p className="f-1">transition-timing-function: ease-in-out; saída e chegada suave</p>
+            <p className="f-1">transition-timing-function: cubic-bezier(x1, y1, x2, y2); aplica 
+              uma aceleração personalizada para a chegada e saída
+            </p>
+            <p className="f-1">aplicando transition-timing-function: cubic-bezier(.42,0,.5,.9); na área abaixo</p>
+            <div className="area2"></div>
+            
+            <p className="f-1">transition-timing-function: steps(); aplica uma transição por passos de movimento quantitativos</p>
+            <p>EX: se transition-timing-function: steps(5); a transição irá parar 5 vezes antes de terminar</p>
+
+            <div className="area3"></div>
+            <p className='f-1'>Quanto menor o número de passos, mais visível será a transição</p>
+            <p className="f-1">Há também uma shortcut para as transições: transition: ;</p>
+            <p className='f-1'>@media (prefers-reduced-motion), permite que o usuário habilite ou não as animações</p>
+
         </div>
     </div>
   )
