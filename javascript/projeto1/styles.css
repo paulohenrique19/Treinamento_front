@@ -1,0 +1,42 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.img {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.flex {
+    display: flex;
+}
+
+.px-3\.5 {
+    padding-inline: 3.5rem;
+}
+
+.py-4 {
+    padding-block: 4rem;
+}
+
+.convert {
+    border: 1px solid #2F3279;
+    border-radius: 2rem;
+    width: 30rem;
+    height: 24rem;
+    margin-top: 3rem;
+}
+
+.container {
+    display: block;
+    margin-inline: auto; /*centralizando a página*/
+    width: 30rem;
+}
