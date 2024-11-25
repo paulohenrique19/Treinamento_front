@@ -44,3 +44,22 @@ console.log(maskedNumber)
 /* O padEnd preenche a string no final*/
 const number = "123"
 console.log(number.padEnd(10, "#"))
+
+const txt = "String1, txt1, char1"
+
+// split(), divide a string baseado em algum critério, aqui estamos usando espaços e vírgula
+let separate = txt.split(", ")
+console.log(separate)
+
+// join(), une a string baseado em algum critério
+let joined = separate.join()
+console.log(joined)
+
+let txtFindItem = "Message test for string manipulations"
+
+// indexOf() obtém a posição de um item na string, se não encontrar, retorna -1
+console.log(txtFindItem.indexOf("test"))
+
+// verifica se existe item na string, retorna true se sim e false se não
+console.log(txtFindItem.includes("test"))
+console.log(txtFindItem.toUpperCase().includes("TEST"))
