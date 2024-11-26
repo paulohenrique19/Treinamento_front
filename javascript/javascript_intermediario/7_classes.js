@@ -60,7 +60,9 @@ class Animal {
 }
 
 class Dog extends Animal {
-
+    makeNoise() {
+        console.log("Au... Au... Au...")
+    }
 }
 
 // Dog, herda as propriedades de Animal
@@ -68,7 +70,76 @@ const dog = new Dog("cachorro", 10)
 dog.makeNoise()
 
 class Cat extends Animal {
-
+    makeNoise() {
+        console.log("Miau... Miau... Miau...")
+    }
 }
 
 const cat = new Cat("gato", 8)
+cat.makeNoise()
+
+
+// testes com prototypes
+
+const address = {
+    city: "Chapecó",
+    country: "Brazil"
+}
+
+console.log(address)
+
+const users = ["user1", "user2", "user3"]
+
+const userName = "user"
+console.log(userName.__proto__)
+
+// usando classes para gerar exceções
+
+let obj = [10]
+let index = 300
+
+
+try {
+    // obj.execute()
+
+    if (!obj.includes(10)) {
+        throw new Error("10 não está disponível")
+    }
+
+    if (index > 99) {
+        throw new RangeError("Número " + index + " fora do intervalo, escolha outro número");
+    }
+
+} catch (error) {
+    //verifica se o erro é uma instancia de TypeError
+    if (error instanceof TypeError) {
+        console.log("Método indisponível")
+    }
+
+    // retorna a mensagem de erro se a instancia de RangeError existir
+    else if (error instanceof RangeError) {
+        console.log(error.message)
+    }
+    else {
+        console.log(error)
+    }
+}
+
+// usando classes para criar erros customizados
+
+class MyCustomError {
+    constructor(message) {
+        this.message = "class of custom error" + message
+    }
+}
+
+try {
+    throw new MyCustomError("custom error thrown")
+} catch (error) {
+    //verificando se o erro é derivado da instancia do erro customizado
+    if (error instanceof MyCustomError) {
+        console.log(error.message)
+    } else {
+        console.log("Não foi possível executar!")
+    }
+}
