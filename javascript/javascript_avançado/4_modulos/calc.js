@@ -1,7 +1,10 @@
-function sum(a, b) {
+export function sum(a, b) {
     return a + b
 }
 
-function multiply(a, b) {
+export function multiply(a, b) {
     return a * b
 }
+
+// Podemos fazer também para exportar:
+// export { sum, multiply}
