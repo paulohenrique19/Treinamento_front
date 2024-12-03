@@ -71,3 +71,38 @@ showMesage("string")
 let userName: { name: string, age: number, address?
     : string} = { name: "Paulo", age: 22}
 
+// ou sigIn(data :{email, password}){}
+function signIn({ email, password, address }:{email: string, password: string, address?: string})
+{
+
+}
+signIn({email: "paulo@gmail.com", password: "123"})
+
+//null e undefined
+
+// undefined
+let value: number
+value = 12
+console.log(value)
+
+let user = {
+    name: "Paulo"
+}
+
+// console.log(user.email)
+
+// null (ausência intencional de valor)
+let email: null
+console.log(email)
+
+if (!email){
+    console.log("Informe o e-mail!")
+}
+
+// union types (quando a variável pode assumir mais de um tipo)
+
+let response: string | null | number
+
+response = "Teste"
+response = null
+response = 19
