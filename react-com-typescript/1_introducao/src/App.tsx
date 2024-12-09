@@ -1,4 +1,4 @@
-import Post from './Post.tsx'
+import Post from './components/Post.tsx'
 import Header from './components/Header.tsx'
 
 import styles from './App.module.css'
@@ -15,12 +15,8 @@ function App() {
         <Sidebar/>
         <main>
           <Post 
-            author = "Teste"
-            content = "Auto-explicativo"
           />
           <Post 
-            author = "Teste"
-            content = "Auto-explicativo"
           />
         </main>
       </div>
