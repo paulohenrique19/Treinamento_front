@@ -1,34 +1,89 @@
 import styles from './Post.module.css';
 import Comment  from './Comment.tsx';
+import Avatar from './Avatar.tsx';
 
-const Post = () => {
+import { PostProps } from './interfaces/Post.ts'
+
+// Libs para datas
+import { format, formatDistanceToNow } from 'date-fns';
+import { ptBR } from 'date-fns/locale/pt-BR'
+import { useState } from 'react';
+
+
+
+// usando desestruturação para não ficar repetindo props.(nome do obj)
+const Post = ({author, publishedAt, content}: PostProps) => {
+
+    const [comments, setComments] = useState([
+        'Teste comentário'
+    ])
+
+    const [newCommentText, setNewCommentText] = useState('')
+
+    const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
+        locale: ptBR,
+    })
+
+    const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+        locale: ptBR,
+        addSuffix: true
+    })
+
+    function handleCreateNewComment() {
+        event?.preventDefault()
+
+        setComments([...comments, newCommentText])
+        setNewCommentText('');
+    }
+
+    function handleNewCommentChange() {
+        setNewCommentText(event?.target.value);
+    }
+
+    function deleteComment(comment) {
+
+    }
+
+
+
   return (
     <div>
         <article className={styles.post}>
             <header>
                 <div className={styles.author}>
-                    <img className={styles.avatar} src="https://images.unsplash.com/photo-1453928582365-b6ad33cbcf64?q=50&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+                    {/* Passando só a propriedade sem valor ex: "hasBorder", o react entende como um boolean com valor true */}
+                    <Avatar hasBorder src={author.avatarUrl}/>
                     <div className={styles.authorInfo}>
-                        <strong>User 1</strong>
-                        <span>Web Developer</span>
+                        <strong>{author.name}</strong>
+                        <span>{author.role}</span>
                     </div>
                 </div>
 
 
-                <time title="09/12/24 13:00" dateTime="2024-09-12 13:00:00">
-                    Publicado há 1h
+                <time title={publishedDateFormatted} dateTime={publishedAt.toISOString()}>
+                    {publishedDateRelativeToNow}
                 </time>
             </header>
 
             <div className={styles.content}>
-                <p>Teste postagem</p>
-                <p><a href="">Teste link</a></p>
+                {content.map((line) => {
+                    if (line.type === 'paragraph')
+                    {
+                        return <p key={line.content}>{line.content}</p>
+                    }
+                    if (line.type === 'link')
+                    {
+                        return <p key={line.content}><a href="">{line.content}</a></p>
+                    }
+                })}
             </div>
 
-            <form className={styles.commentForm}>
+            <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
                 <strong>Deixe seu feedback</strong>
                 <textarea 
                     placeholder="Deixe um comentário"
+                    value={newCommentText}
+                    onChange={handleNewCommentChange}
                 />
 
                 <footer>
@@ -38,9 +93,14 @@ const Post = () => {
             </form>
 
             <div className={styles.commentList}>
-                <Comment />
-                <Comment />
-                <Comment />
+                {comments.map(comment => {
+                    return ( <Comment 
+                        key={comment} 
+                        content={comment} 
+                        onDeleteComment={deleteComment}
+                    />
+                    )
+                })}
             </div>
 
         </article>
