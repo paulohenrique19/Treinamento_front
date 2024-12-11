@@ -3,7 +3,7 @@ import Comment  from './Comment.tsx';
 import Avatar from './Avatar.tsx';
 
 import { PostProps } from './interfaces/Post.ts'
-
+ 
 // Libs para datas
 import { format, formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale/pt-BR'
@@ -29,20 +29,36 @@ const Post = ({author, publishedAt, content}: PostProps) => {
         addSuffix: true
     })
 
+    //adiciona um novo comentário
     function handleCreateNewComment() {
         event?.preventDefault()
 
+        //insere o comentário na lista existente
         setComments([...comments, newCommentText])
         setNewCommentText('');
     }
 
     function handleNewCommentChange() {
+        event?.target.setCustomValidity('');
         setNewCommentText(event?.target.value);
     }
 
-    function deleteComment(comment) {
-
+    function handleNewCommentInvalid(){
+        event?.target.setCustomValidity('Esse campo é obrigatório');
     }
+
+
+    function deleteComment(commentToDelete : any) {
+        // Imutabilidade - as variáveis não sofrem mutação, nós criamos um novo valor (novo espaço na memória)
+        const commentsWithoutDeletedOne = comments.filter(comment => {
+            return comment !== commentToDelete;
+        })
+
+
+        setComments(commentsWithoutDeletedOne);
+    }
+
+    const isNewCommentEmpty = newCommentText.length === 0;
 
 
 
@@ -84,10 +100,14 @@ const Post = ({author, publishedAt, content}: PostProps) => {
                     placeholder="Deixe um comentário"
                     value={newCommentText}
                     onChange={handleNewCommentChange}
+                    onInvalid={handleNewCommentInvalid}
+                    required
                 />
 
                 <footer>
-                    <button type="submit">Publicar</button>
+                    <button type="submit" disabled={isNewCommentEmpty}>
+                        Publicar
+                    </button>
                 </footer>
 
             </form>
