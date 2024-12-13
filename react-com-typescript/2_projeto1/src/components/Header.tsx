@@ -5,7 +5,12 @@ const Header = () => {
   return (
     <div className={styles.header}>
         <img src={logo} alt="Logo do projeto" />
-        <p className={styles['text-decoration']}>todo</p>
+        <div className={styles['text-decoration']}>
+          <p>t</p>
+          <p>o</p>
+          <p>d</p>
+          <p>o</p>
+        </div>
     </div>
   )
 }

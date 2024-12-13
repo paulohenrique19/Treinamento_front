@@ -1,0 +1,81 @@
+.mainArea {
+    background-color: var(--gray-600);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.textArea {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 46rem;
+}
+
+.taskForm {
+    margin-top: calc(0px - 1.6875rem);
+    display: flex;
+    gap: 0.5rem;
+     /* Garantir que o formulário ocupe toda a largura */
+    width: 100%;
+}
+
+.taskForm textarea {
+    width: 100%;
+    background: var(--gray-500);
+    resize: none;
+    border: none;
+    border-radius: 8px;
+    height: 3.375rem;
+    padding: 1rem;
+    line-height: 140%;
+    font-weight: normal;
+    font-size: 1rem;
+}
+
+
+.taskForm button {
+    max-width: 5.625rem;
+    width: 100%;
+    border-radius: 8px;
+    background: var(--blue-dark);
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.taskList {
+    display: flex;
+    justify-content: space-between;
+    margin: 5rem auto;
+    width: 100%;
+    max-width: 46rem;
+}
+
+.createdTaskNumber {
+    display: flex;
+    gap: 0.5rem;
+    color: var(--blue);
+}
+
+.completedTasksNumber {
+    display: flex;
+    gap: 0.5rem;
+    color: var(--purple);
+}
+
+@media (max-width: 768px) {
+    .taskForm {
+        flex-direction: column; /* Alinha o botão abaixo do textarea */
+    }
+
+    .taskForm button {
+        width: 100%; /* Garante que o botão ocupe toda a largura disponível */
+        max-width: none; /* Remove o limite máximo de largura do botão */
+        margin-top: 1rem; /* Espaçamento entre o textarea e o botão */
+        height: 3.375rem;
+    }
+}
+
