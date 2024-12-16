@@ -3,13 +3,29 @@ import MainArea from './components/MainArea'
 import './global.css'
 import styles from './App.module.css'
 
+interface Task {
+  id: number;
+  task: string;
+  done: boolean;
+}
 
-const tasks = [
-  "Task 1",
-  "Task 2",
-  "Task 3",
-  "Task 4",
-  "Task 5"
+const tasks: Task[] = [
+  {
+    id: 1,
+    task: "Task 1",
+    done: false
+  },
+  {
+    id: 2,
+    task: "Task 2",
+    done: false
+  },
+  {
+    id: 3,
+    task: "Task 3",
+    done: false
+  },  
+
 ]
 
 function App() {

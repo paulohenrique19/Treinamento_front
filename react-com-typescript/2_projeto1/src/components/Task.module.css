@@ -1,0 +1,39 @@
+.taskArea {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 46rem;
+    height: 4.5rem;
+    padding: 1rem;
+    background-color: var(--gray-500);
+    border-radius: 0.5rem;
+}
+
+.taskArea p {
+    color: var(--gray-100);
+}
+
+.flexStart {
+    align-self: flex-start;
+}
+
+.select {
+    color: unset;
+}
+
+.select:hover {
+    color: var(--blue-dark);
+}
+
+.flexEnd {
+    align-self: flex-end;
+}
+
+.trash {
+    color: grey;
+}
+
+.trash:hover {
+    color: var(--danger);
+}
