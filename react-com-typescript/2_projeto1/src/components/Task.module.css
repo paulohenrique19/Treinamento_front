@@ -14,6 +14,11 @@
     color: var(--gray-100);
 }
 
+.taskArea del {
+    color: var(--gray-100);
+}
+
+
 .flexStart {
     align-self: flex-start;
 }

@@ -2,6 +2,7 @@ import styles from './MainArea.module.css'
 import plus from '../assets/plus.svg'
 import Taskk from './Taskk.tsx'
 import { useState } from 'react';
+import { FormEvent } from 'react';
 
 
 interface Task {
@@ -13,7 +14,9 @@ interface Task {
 
 interface MainAreaProps {
   tasks: Task[];  // Tipando tasks como um array de Task
+  
 }
+
 
 
 
@@ -24,7 +27,9 @@ const MainArea: React.FC<MainAreaProps> = ({ tasks }) => {
   
   const [doneTaskList, setDoneTaskList] = useState(0)
 
-  const [tasksList, setTasksList] = useState(tasks)
+  const [tasksList, setTasksList] = useState<Task[]>(tasks);
+
+  const [newTaskText, setNewTaskText] = useState('')
 
   function deleteTask(taskToDelete : number) {
     const tasksWithoutDeletedOne = tasksList.filter(task => {
@@ -60,16 +65,59 @@ const MainArea: React.FC<MainAreaProps> = ({ tasks }) => {
 
   }
 
+  //adiciona uma nova tarefa
+  const handleCreateNewTask = (event: FormEvent<HTMLFormElement>) => {
+    event?.preventDefault()
+    const nextId = tasksList.length > 0 ? Math.max(...tasksList.map(task => task.id)) + 1 : 1;
 
+
+    const newTask: Task = {
+      id: nextId,
+      task: newTaskText,
+      done: false
+    }
+
+
+    //insere a tarefa na lista existente
+    setTasksList([...tasksList, newTask])
+    setNewTaskText('');
+  }
+
+  function handleNewTaskChange() {
+    event?.target.setCustomValidity('');
+    setNewTaskText(event?.target.value);
+  }
+
+  /*
+  
+  const addTask = (taskText: string) => {
+  // Obter o maior ID da lista de tarefas
+  const nextId = tasksList.length > 0 ? Math.max(...tasksList.map(task => task.id)) + 1 : 1;
+
+  // Criar a nova tarefa
+  const newTask: Task = {
+    id: nextId,
+    task: taskText,
+    done: false,
+  };
+
+  // Atualizar o estado com a nova lista de tarefas
+  setTasksList([...tasksList, newTask]);
+};
+  
+  
+  */
 
 
   return (
     <div className={styles.mainArea}>
       <div className={styles.textArea}>
-        <form action="" className={styles.taskForm}>
+        <form onSubmit={handleCreateNewTask} className={styles.taskForm}>
           <textarea 
             placeholder="Adicione uma nova tarefa"
-            
+            required
+            onChange={handleNewTaskChange}
+            value={newTaskText}
           />
           <button>
             <p>

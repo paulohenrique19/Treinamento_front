@@ -17,22 +17,20 @@ interface TaskProps {
 
 
 const Taskk: React.FC<TaskProps> = ({ task, onDeleteTask, onMarkedTask}) => {    
-  
-
   return (
     <div className={styles.taskArea}>
-        
         <img className={`${styles.select} ${styles.flexStart}`} src={check} alt="" onClick={() => onMarkedTask(task)}/>
           {task.done ? (
             <del>
               {task.task}
             </del>
           ) : (
-            <p>{task.task}</p>
+            <p>{task.task}</p>  
           )}
         <div className={styles.trash} onClick={() => onDeleteTask(task.id)}><Trash size={24}/></div>
     </div>
-  )
+  );
 }
+
 
 export default Taskk
