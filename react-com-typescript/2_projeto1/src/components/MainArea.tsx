@@ -1,5 +1,6 @@
 import styles from './MainArea.module.css'
 import plus from '../assets/plus.svg'
+import clipboard from '../assets/clipboard.svg'
 import Taskk from './Taskk.tsx'
 import { useState } from 'react';
 import { FormEvent } from 'react';
@@ -131,15 +132,15 @@ const MainArea: React.FC<MainAreaProps> = ({ tasks }) => {
       <div className={styles.taskList}>
         <div className={styles.createdTaskNumber}>
           <p>Tarefas criadas</p>
-          <p>{tasksList.length}</p>
+          <div>{tasksList.length}</div>
         </div>
         <div className={styles.completedTasksNumber}>
           <p>Concluídas</p>
-          <p>{doneTaskList} de {tasksList.length}</p>
+          <div>{doneTaskList} de {tasksList.length}</div>
         </div>
       </div>
 
-      <div className={styles.taskListArea}>
+      {tasksList.length !== 0 ? (<div className={styles.taskListArea}>
         {tasksList.map((task: Task) => {
           return (
             <Taskk 
@@ -150,7 +151,18 @@ const MainArea: React.FC<MainAreaProps> = ({ tasks }) => {
               />
           )
         })}
+      </div>) : 
+      
+      (
+      <div className={styles.noTasks}>
+        <div></div>
+        <img src={clipboard} alt=""/>
+        <p>Você ainda não tem tarefas cadastradas</p>
+        <p>Crie tarefas e organize seus itens a fazer</p>
       </div>
+      )}
+
+      
 
     </div>
   )

@@ -2,7 +2,8 @@
     background-color: var(--gray-600);
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
+    max-height: max-content;
 }
 
 .textArea {
@@ -65,10 +66,33 @@
     color: var(--blue);
 }
 
+.createdTaskNumber div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 1.5rem;
+    border-radius: 8px 8px;
+    background: var(--gray-400);
+    font-size: 0.75rem;
+    color: var(--gray-100);
+}
+
 .completedTasksNumber {
     display: flex;
     gap: 0.5rem;
     color: var(--purple);
+}
+
+.completedTasksNumber div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 3.25rem;
+    border-radius: 8px 8px;
+    background: var(--gray-400);
+    font-size: 1rem;
+    color: var(--gray-100);
+    font-size: 0.75rem;
 }
 
 @media (max-width: 768px) {
@@ -88,4 +112,35 @@
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+}
+
+.noTasks {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.noTasks div:nth-child(1)
+{ 
+    min-width: 46rem;
+    max-width: 46rem;
+    border-top: 1px solid var(--gray-300);
+}
+
+.noTasks p:nth-child(3) {
+    color: var(--gray-300);
+    align-self: center;
+}
+
+.noTasks p:nth-child(4) {
+    color: var(--gray-300);
+    font-weight: 300;
+    align-self: center;
+}
+
+.noTasks img {
+    width: 3.5rem;
+    height: 3.5rem;
+    align-self: center;
 }
