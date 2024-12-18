@@ -1,10 +1,14 @@
+import styles from "./Button.module.css";
+import { ButtonContainer, ButtonVariant } from "./Button.styles";
+
 interface ButtonProps {
-    color?: 'primary' | 'secondary' | 'danger' | 'success';
+    variant?: ButtonVariant;
 }
 
-const Button = (props: ButtonProps) => {
+//define a cor 'primary' caso nenhuma seja passada na prop do componente
+const Button = ({variant = 'primary'}: ButtonProps) => {
   return (
-    <button>Enviar</button>
+    <ButtonContainer variant={variant}>Enviar</ButtonContainer>
   )
 }
 
