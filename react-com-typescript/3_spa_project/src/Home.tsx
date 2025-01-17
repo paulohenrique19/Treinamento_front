@@ -1,23 +1,40 @@
-import { createContext } from "react";
+import { createContext, useContext, useState } from "react";
 
-const CyclesContext = createContext()
+const CyclesContext = createContext({} as any)
 
 function NewCycleForm() {
-    return <h1>NewCycleForm</h1>
+    let { activeCycle, setActiveCycle } = useContext(CyclesContext)
+
+    return ( 
+        <h1>
+            NewCycleForm: {activeCycle}
+            <button
+                onClick={() => {
+                    setActiveCycle(2)
+                }}
+            >
+                Alterar ciclo ativo    
+            </button>
+        </h1> 
+    )
 }
 
 function Countdown() {
-    return <h1>Countdown</h1>
+    const { activeCycle } = useContext(CyclesContext)
+
+    return <h1>Countdown: {activeCycle}</h1>
 }
 
 
 export function Home() {
-    const activeCycle = 1;
+    const [activeCycle, setActiveCycle] = useState(0)
 
     return (
-        <div>
-          <NewCycleForm activeCycle={activeCycle}/>
-          <Countdown activeCycle={activeCycle}/>
-        </div>
+        <CyclesContext.Provider value={ {activeCycle, setActiveCycle} }>
+            <div>
+                <NewCycleForm />
+                <Countdown />
+            </div>
+        </CyclesContext.Provider>
     )
 }
