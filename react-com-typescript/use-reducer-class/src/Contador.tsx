@@ -1,13 +1,22 @@
 import { useReducer} from "react";
 
-const initializeState = { count: 0};
+type State = {
+    count: number
+}
 
-function reducer(state, action)
+type Action = | { type: 'increment' } | { type: 'decrement' };
+
+const initializeState = { count: 0 };
+
+function reducer(state: State, action: Action)
 {
     switch(action.type)
     {
-        case "increment":
-
+        case 'increment':
+            return { count: state.count + 1 };
+        case 'decrement':
+            return { count: state.count - 1 };     
+            
     }
 }
 
@@ -23,9 +32,10 @@ export function Contador() {
     return (
         <div>
             <h1>Contador</h1>
-
             <div>
-               
+               <button onClick={ () => dispatch({ type: 'decrement' })}>-</button>
+               <span>{state.count}</span>
+               <button onClick={ () => dispatch({ type: 'increment' })}>+</button>
             </div>
         </div>
     )
