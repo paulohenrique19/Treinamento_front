@@ -1,8 +1,18 @@
 import { useState } from 'react'
 import './App.css'
-import { useForm } from 'react-hook-form'
+import { useForm, useFieldArray } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+
+/**
+ * Tópicos abordados
+ * 
+ * [ ] Validação / transformação
+ * [ ] Field Arrays
+ * [ ] Upload de arquivos
+ * [ ] Composition Pattern
+ */
+
 
 // o zod é usado para validação
 const createUserFormSchema = z.object({
@@ -16,7 +26,11 @@ const createUserFormSchema = z.object({
   email: z.string()
     .nonempty('O e-mail é obrigatório')
     .email('Formato de e-mail inválido')
-    .toLowerCase(),
+    .toLowerCase()
+    .refine(email => {
+      return email.endsWith('.com')
+    }, 'O email deve terminar .com')
+    , 
   password: z.string()
     .min(6, 'Password must be at least 6 characters long')
 })
@@ -32,6 +46,10 @@ function App() {
     formState: { errors } 
   } = useForm<CreateUserFormData>({
     resolver: zodResolver(createUserFormSchema)
+  })
+
+  const {} = useFieldArray ({
+    name: ''
   })
   
   
