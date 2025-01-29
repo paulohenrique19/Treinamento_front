@@ -1,9 +1,27 @@
-import { HeaderContainer } from "./styles";
+import { 
+  HeaderContainer, 
+  Logo, 
+  Local, 
+  CartIcon,
+  CartImage, 
+  Separator 
+} from "./styles";
+
+
+
 export const Header = () => {
   return (
     <HeaderContainer>
-        <p>Teste</p>
-        <p>Teste</p>
+        <Logo />
+        <Separator>
+          <Local>
+            <img src="src/assets/images/LocalIcon.svg" alt="" />
+            <p>Chapecó, SC</p>
+          </Local>
+          <CartIcon>
+            <CartImage />
+          </CartIcon>
+        </Separator>
     </HeaderContainer>
   );
 };
