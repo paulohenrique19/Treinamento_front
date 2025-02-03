@@ -11,13 +11,18 @@ export const SectionContainer = styled.div`
 `
 
 export const Limitator = styled.div`
+    
+    display: flex;
+    gap: 10rem;
     margin: auto;
     padding: 1rem;
 
     width: auto;
     height: auto;
     max-width: 80rem;
-    border: 1px solid black;
+    
+
+    
 `
 
 export const Title = styled.div`
@@ -38,13 +43,24 @@ export const MajorSeparator = styled.div`
     max-width: 35.4375rem;
     max-height: 5.25rem;
     flex-wrap: wrap;
-    border: 1px solid black;
+    margin-top: 3rem;
 `
 export const MinorSeparator = styled.div`
     display: flex;
+    gap: 0.75rem;
+    margin-bottom: 40px;
     max-width: 50%;
     height: 2rem;
     width: 18.37500rem;
     max-height: 2rem;
-    border: 1px solid;
+    p {
+        transform: translateY(10%); /* Move o conteúdo para cima */
+    }
+`
+export const CoffeeImage = styled.div`
+
+`
+
+export const FirstSeparator = styled.div`
+
 `
