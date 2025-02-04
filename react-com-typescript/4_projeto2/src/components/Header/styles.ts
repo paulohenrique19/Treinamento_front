@@ -15,7 +15,7 @@ export const HeaderContainer = styled.header`
 `
 
 export const Logo = styled.img.attrs({
-    src: 'src/assets/images/logos.svg', // Caminho relativo ao seu `public` (sem o ../../)
+    src: 'src/assets/images/Home/logos.svg', // Caminho relativo ao seu `public` (sem o ../../)
   })`
     
 `
@@ -43,7 +43,7 @@ export const Local = styled.div`
         font-family: 'Roboto', sans-serif;
         font-weight: 500;
         font-size: 14px;
-        line-height: 1.6;
+        line-height: 1.7;
     }
 
 `
@@ -55,10 +55,12 @@ export const CartIcon = styled.button`
     background-color: #F1E9C9;
     border-radius: 0.375rem;
     padding: 0.5rem;
+
+    
 `
 
 export const CartImage = styled.img.attrs({
-    src: 'src/assets/images/Icon.svg', // Caminho relativo ao seu `public` (sem o ../../)
+    src: 'src/assets/images/Home/Icon.svg', // Caminho relativo ao seu `public` (sem o ../../)
   })`
     
 `

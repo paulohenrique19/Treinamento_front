@@ -7,6 +7,8 @@ import {
   Separator 
 } from "./styles";
 
+import { NavLink } from 'react-router-dom'
+
 
 
 export const Header = () => {
@@ -15,12 +17,14 @@ export const Header = () => {
         <Logo />
         <Separator>
           <Local>
-            <img src="src/assets/images/LocalIcon.svg" alt="" />
+            <img src="src/assets/images/Home/LocalIcon.svg" alt="" />
             <p>Chapecó, SC</p>
           </Local>
-          <CartIcon>
-            <CartImage />
-          </CartIcon>
+          <NavLink to="/payment" title="Pagamento">
+            <CartIcon>
+              <CartImage />
+            </CartIcon>
+          </NavLink>
         </Separator>
     </HeaderContainer>
   );

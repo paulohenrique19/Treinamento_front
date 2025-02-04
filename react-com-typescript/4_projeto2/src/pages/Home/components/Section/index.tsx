@@ -37,7 +37,7 @@ export const Section = () => {
                     </MajorSeparator>
                 </FirstSeparator>
                 <CoffeeImage>
-                    <img src="src/assets/images/CoffeeImage.svg" alt="" />
+                    <img src="src/assets/images/Section/CoffeeImage.svg" alt="" />
                 </CoffeeImage>
             </Limitator>
         </SectionContainer>

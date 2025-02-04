@@ -2,8 +2,8 @@ import {
     CoffeeListContainer,
     Title,
     Coffees
-} from "./styles";
-import { Produto } from "../../interfaces/Produto"
+} from "./styles.ts";
+import { Produto } from "../../../../interfaces/Produto.ts"
 import { Coffee } from "../Coffee/index.tsx"
 
 interface CoffeeListProps {

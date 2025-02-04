@@ -20,7 +20,8 @@ export const CoffeeListContainer = styled.div`
 export const Title = styled.div`
     font-size: 2rem;
     font-family: "Baloo 2", serif;
-    font-weight: 600;
+    font-weight: 800;
+    color: #403937;
 `
 
 export const Coffees = styled.div`
