@@ -14,7 +14,7 @@ export const CoffeeListContainer = styled.div`
 
     padding: 1rem;
 
-    border: 1px solid ;
+    
 `
 
 export const Title = styled.div`
