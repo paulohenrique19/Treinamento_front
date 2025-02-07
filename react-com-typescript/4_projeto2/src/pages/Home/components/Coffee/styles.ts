@@ -49,12 +49,13 @@ export const Descricao = styled.div`
 
 export const Separator = styled.div`
     display: flex;
-    gap: 0.5;
+    gap: 1rem;
 `
 
 export const Preco = styled.div`
     display: flex;
     gap: 0.2rem;
+
     p {
         font-size: 2rem;
         font-family: "Baloo 2", serif;
@@ -65,9 +66,42 @@ export const Preco = styled.div`
 
 export const AddRemove = styled.div`
     display: flex;
-    gap: 0.2rem;
+    align-items: center;
+    align-self: center;
+    gap: 0.5rem;
     padding: 0.5rem;
+    height: 2.5rem;
+    border-radius: 0.375rem;
 
     background-color: #E6E5E5;
 
+    p:nth-child(1){
+        color: #8047F8;
+        font-size: 1.4rem;
+        cursor: pointer;
+    }
+
+    
+    p:nth-child(3){
+        color: #8047F8;
+        font-size: 1.4rem;
+        cursor: pointer;
+    }
+`
+export const ConfirmAdd = styled.button`
+    display: block;
+    justify-content: center;  /* Alinha horizontalmente */
+    align-items: center;      /* Alinha verticalmente */
+    border: none;
+    align-self: center;
+    padding: 0.5rem;
+    height: 2.5rem;
+    background-color: #4B2995;
+    border-radius: 0.375rem;
+`
+
+export const ShoppingCartSimple = styled.img.attrs({
+    src: 'src/assets/images/CoffeeInterface/ShoppingCartSimple.svg',
+})`
+    padding-top: 1rem
 `

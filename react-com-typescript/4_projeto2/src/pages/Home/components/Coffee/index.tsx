@@ -6,9 +6,11 @@ import {
     Descricao,
     Separator,
     Preco, 
-    AddRemove
+    AddRemove,
+    ConfirmAdd,
+    ShoppingCartSimple
       } from "./styles";
-
+                                  
 interface CoffeeProps {
   produto: Produto; // Aqui estamos dizendo que a prop será um único produto, não um array
 }
@@ -16,6 +18,7 @@ interface CoffeeProps {
 export const Coffee = ({ produto }: CoffeeProps) => {
 
   const [CartItemQuantity, setCartItemQuantity] = useState(0)
+
 
   return (
     <CoffeeContainer>
@@ -39,6 +42,9 @@ export const Coffee = ({ produto }: CoffeeProps) => {
           <p>{CartItemQuantity}</p>
           <p>-</p>
         </AddRemove>
+        <ConfirmAdd>
+          <ShoppingCartSimple />
+        </ConfirmAdd>
       </Separator>
 
     </CoffeeContainer>
