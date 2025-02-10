@@ -1,4 +1,6 @@
+// src/components/Coffee/index.tsx
 import { useState } from "react";
+import { useCart } from "../../../../contexts/CartContext"; // Importe o hook para acessar o carrinho
 import { Produto } from "../../../../interfaces/Produto";
 import { 
     CoffeeContainer, 
@@ -9,20 +11,31 @@ import {
     AddRemove,
     ConfirmAdd,
     ShoppingCartSimple
-      } from "./styles";
-                                  
+} from "./styles";
+
 interface CoffeeProps {
-  produto: Produto; // Aqui estamos dizendo que a prop será um único produto, não um array
+  produto: Produto;
 }
 
 export const Coffee = ({ produto }: CoffeeProps) => {
+  const [CartItemQuantity, setCartItemQuantity] = useState(0);
+  const { state, dispatch } = useCart(); // Acesse o estado e o dispatch do carrinho
 
-  const [CartItemQuantity, setCartItemQuantity] = useState(0)
+  const handleAddItem = () => {
+    dispatch({ type: "ADD_ITEM", produto });
+    setCartItemQuantity(CartItemQuantity + 1); // Atualiza a quantidade local
+  };
 
+  const handleRemoveItem = () => {
+    if (CartItemQuantity > 0) {
+      dispatch({ type: "UPDATE_ITEM", produtoId: produto.id, quantidade: CartItemQuantity - 1 });
+      setCartItemQuantity(CartItemQuantity - 1); // Atualiza a quantidade local
+    }
+  };
 
   return (
     <CoffeeContainer>
-      <img src={produto.imagemUrl} alt="" />
+      <img src={produto.imagemUrl} alt={produto.nome} />
       <Label>
         {produto.categoria?.map((pdr, index) => (
           <p key={index}>{pdr.toUpperCase()}</p>
@@ -30,7 +43,7 @@ export const Coffee = ({ produto }: CoffeeProps) => {
       </Label>
       <h2>{produto.nome}</h2>
       <Descricao>
-          <p>{produto.descricao}</p>
+        <p>{produto.descricao}</p>
       </Descricao>
       <Separator>
         <Preco>
@@ -38,16 +51,14 @@ export const Coffee = ({ produto }: CoffeeProps) => {
           <p>{produto.preco}</p>
         </Preco>
         <AddRemove>
-          <p>+</p>
+          <p onClick={handleAddItem}>+</p>
           <p>{CartItemQuantity}</p>
-          <p>-</p>
+          <p onClick={handleRemoveItem}>-</p>
         </AddRemove>
         <ConfirmAdd>
           <ShoppingCartSimple />
         </ConfirmAdd>
       </Separator>
-
     </CoffeeContainer>
   );
 };
-
