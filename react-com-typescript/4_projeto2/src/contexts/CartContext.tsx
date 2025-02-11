@@ -10,6 +10,8 @@ interface CartItem {
 
 interface CartState {
   items: CartItem[];
+  totalItems: number;
+  totalValue: number;  // Adicionando o total de valor dos itens
 }
 
 // Tipos das ações
@@ -21,6 +23,13 @@ type Action =
 // Estado inicial do carrinho
 const initialState: CartState = {
   items: [],
+  totalItems: 0,
+  totalValue: 0,  // Inicializamos com 0
+};
+
+// Função para calcular o valor total
+const calculateTotalValue = (items: CartItem[]): number => {
+  return items.reduce((acc, item) => acc + item.produto.preco * item.quantidade, 0);
 };
 
 // Reducer para gerenciar o carrinho
@@ -28,39 +37,47 @@ const cartReducer = (state: CartState, action: Action): CartState => {
   switch (action.type) {
     case "ADD_ITEM":
       const existingItem = state.items.find(item => item.produto.id === action.produto.id);
+      let updatedItems;
       if (existingItem) {
         // Se o item já existir, aumenta a quantidade
-        return {
-          ...state,
-          items: state.items.map(item =>
-            item.produto.id === action.produto.id
-              ? { ...item, quantidade: item.quantidade + 1 }
-              : item
-          ),
-        };
+        updatedItems = state.items.map(item =>
+          item.produto.id === action.produto.id
+            ? { ...item, quantidade: item.quantidade + 1 }
+            : item
+        );
       } else {
         // Se o item não existir, adiciona o item ao carrinho
-        return {
-          ...state,
-          items: [...state.items, { produto: action.produto, quantidade: 1 }],
-        };
+        updatedItems = [...state.items, { produto: action.produto, quantidade: 1 }];
       }
+      
+      // Calcular o total de itens e o total de valor
+      const totalItems = updatedItems.reduce((acc, item) => acc + item.quantidade, 0);
+      const totalValue = calculateTotalValue(updatedItems);
+
+      return { ...state, items: updatedItems, totalItems, totalValue };
+
     case "REMOVE_ITEM":
-      // Remove o item do carrinho
-      return {
-        ...state,
-        items: state.items.filter(item => item.produto.id !== action.produtoId),
-      };
+      const filteredItems = state.items.filter(item => item.produto.id !== action.produtoId);
+      
+      // Calcular o total de itens e o total de valor
+      const totalItemsAfterRemoval = filteredItems.reduce((acc, item) => acc + item.quantidade, 0);
+      const totalValueAfterRemoval = calculateTotalValue(filteredItems);
+
+      return { ...state, items: filteredItems, totalItems: totalItemsAfterRemoval, totalValue: totalValueAfterRemoval };
+
     case "UPDATE_ITEM":
-      // Atualiza a quantidade de um item
-      return {
-        ...state,
-        items: state.items.map(item =>
-          item.produto.id === action.produtoId
-            ? { ...item, quantidade: action.quantidade }
-            : item
-        ),
-      };
+      const updatedItemsForQuantity = state.items.map(item =>
+        item.produto.id === action.produtoId
+          ? { ...item, quantidade: action.quantidade }
+          : item
+      );
+
+      // Calcular o total de itens e o total de valor
+      const totalItemsAfterUpdate = updatedItemsForQuantity.reduce((acc, item) => acc + item.quantidade, 0);
+      const totalValueAfterUpdate = calculateTotalValue(updatedItemsForQuantity);
+
+      return { ...state, items: updatedItemsForQuantity, totalItems: totalItemsAfterUpdate, totalValue: totalValueAfterUpdate };
+
     default:
       return state;
   }
