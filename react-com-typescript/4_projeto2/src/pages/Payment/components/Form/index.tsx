@@ -70,12 +70,12 @@ export const FormAddress = () => {
             <img src={item.produto.imagemUrl} alt={item.produto.nome} />
             <div>
               <p>{item.produto.nome}</p>
-              <span>Qtd: {item.quantidade}</span>
+              <span>Quantidade: {item.quantidade}</span>
               <span>R$ {item.produto.preco.toFixed(2)}</span>
             </div>
           </CartItem>
         ))}
-        {state.totalValue.toFixed(2)}
+        Preço total: R$ {state.totalValue.toFixed(2)}
       </CartContainer>
     </Container>
   );
