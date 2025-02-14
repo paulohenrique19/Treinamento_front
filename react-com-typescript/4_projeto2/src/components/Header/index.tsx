@@ -16,7 +16,9 @@ export const Header = () => {
 
   return (
     <HeaderContainer>
-      <Logo />
+      <NavLink to="/" title="Menu">
+        <Logo/>
+      </NavLink>
       <Separator>
         <Local>
           <img src="src/assets/images/Home/LocalIcon.svg" alt="" />

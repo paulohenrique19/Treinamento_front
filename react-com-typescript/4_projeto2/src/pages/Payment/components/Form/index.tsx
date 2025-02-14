@@ -7,6 +7,7 @@ import { Container, FormContainer, Input, Button, CartContainer, CartItem } from
 
 
 
+
 export const AddressSchema = z.object({
     nome: z.string().min(1, "Nome é obrigatório"),
     rua: z.string().min(1, "Rua é obrigatória"),
@@ -17,13 +18,24 @@ export const AddressSchema = z.object({
 export type AddressFormData = z.infer<typeof AddressSchema>;
 
 export const FormAddress = () => {
-  const { state } = useCart();
+  const { state, dispatch } = useCart();
   const { register, handleSubmit, formState: { errors } } = useForm<AddressFormData>({
     resolver: zodResolver(AddressSchema),
   });
 
   const onSubmit = (data: AddressFormData) => {
     console.log("Endereço enviado: ", data);
+  };
+
+
+
+  // Funções para adicionar e remover itens
+   const handleAddItem = (item: any) => {
+    dispatch({ type: "ADD_ITEM", produto: item.produto.id});
+  };
+
+  const handleRemoveItem = (item: any) => {
+    dispatch({ type: "REMOVE_ITEM", produtoId: item.produto.id });
   };
 
   return (
@@ -72,6 +84,8 @@ export const FormAddress = () => {
               <p>{item.produto.nome}</p>
               <span>Quantidade: {item.quantidade}</span>
               <span>R$ {item.produto.preco.toFixed(2)}</span>
+              <Button onClick={() => handleAddItem(item)}>Adicionar</Button>
+              <Button onClick={() => handleRemoveItem(item)}>Remover</Button>
             </div>
           </CartItem>
         ))}
