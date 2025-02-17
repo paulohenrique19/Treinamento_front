@@ -1,42 +1,60 @@
-// src/pages/FormAddress/index.tsx
 import { useCart } from "../../../../contexts/CartContext";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Container, FormContainer, Input, Button, CartContainer, CartItem } from "./styles";
-
-
-
+import { useState, useEffect } from "react";
 
 export const AddressSchema = z.object({
-    nome: z.string().min(1, "Nome é obrigatório"),
-    rua: z.string().min(1, "Rua é obrigatória"),
-    cidade: z.string().min(1, "Cidade é obrigatória"),
-    cep: z.string().min(1, "CEP é obrigatório"),
-  });
-  
+  nome: z.string().min(1, "Nome é obrigatório"),
+  rua: z.string().min(1, "Rua é obrigatória"),
+  cidade: z.string().min(1, "Cidade é obrigatória"),
+  cep: z.string().min(1, "CEP é obrigatório"),
+});
+
 export type AddressFormData = z.infer<typeof AddressSchema>;
 
 export const FormAddress = () => {
   const { state, dispatch } = useCart();
+    const [cartQuantities, setCartQuantities] = useState<{ [key: string]: number }>({});
+
   const { register, handleSubmit, formState: { errors } } = useForm<AddressFormData>({
     resolver: zodResolver(AddressSchema),
   });
+
+  useEffect(() => {
+    const initialQuantities: { [key: string]: number } = {};
+    state.items.forEach(item => {
+      initialQuantities[item.produto.id] = item.quantidade;
+    });
+    setCartQuantities(initialQuantities);
+  }, [state.items]);  
 
   const onSubmit = (data: AddressFormData) => {
     console.log("Endereço enviado: ", data);
   };
 
-
-
-  // Funções para adicionar e remover itens
-   const handleAddItem = (item: any) => {
-    dispatch({ type: "ADD_ITEM", produto: item.produto.id});
+  const handleAddItem = (item: any) => {
+    dispatch({ type: "UPDATE_ITEM", produtoId: item.produto.id, quantidade: cartQuantities[item.produto.id] + 1 });
+    setCartQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [item.produto.id]: (prevQuantities[item.produto.id] || 0) + 1,
+    }));
   };
 
   const handleRemoveItem = (item: any) => {
-    dispatch({ type: "REMOVE_ITEM", produtoId: item.produto.id });
+    if (cartQuantities[item.produto.id] === 1) {
+      dispatch({ type: "REMOVE_ITEM", produtoId: item.produto.id });
+    } else {
+      dispatch({ type: "UPDATE_ITEM", produtoId: item.produto.id, quantidade: cartQuantities[item.produto.id] - 1 });
+    }
+  
+    setCartQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [item.produto.id]: (prevQuantities[item.produto.id] || 0) - 1,
+    }));
   };
+  
 
   return (
     <Container>
@@ -82,10 +100,10 @@ export const FormAddress = () => {
             <img src={item.produto.imagemUrl} alt={item.produto.nome} />
             <div>
               <p>{item.produto.nome}</p>
-              <span>Quantidade: {item.quantidade}</span>
+              <span>Quantidade: {cartQuantities[item.produto.id] || 0}</span> {/* Exibe a quantidade do item */}
               <span>R$ {item.produto.preco.toFixed(2)}</span>
-              <Button onClick={() => handleAddItem(item)}>Adicionar</Button>
-              <Button onClick={() => handleRemoveItem(item)}>Remover</Button>
+              <span onClick={() => handleAddItem(item)}>Adicionar</span>
+              <span onClick={() => handleRemoveItem(item)}>Remover</span>
             </div>
           </CartItem>
         ))}

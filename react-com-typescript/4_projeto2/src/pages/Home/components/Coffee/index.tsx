@@ -1,6 +1,5 @@
-// src/components/Coffee/index.tsx
 import { useState } from "react";
-import { useCart } from "../../../../contexts/CartContext"; // Importe o hook para acessar o carrinho
+import { useCart } from "../../../../contexts/CartContext"; 
 import { Produto } from "../../../../interfaces/Produto";
 import { 
     CoffeeContainer, 
@@ -19,17 +18,17 @@ interface CoffeeProps {
 
 export const Coffee = ({ produto }: CoffeeProps) => {
   const [CartItemQuantity, setCartItemQuantity] = useState(0);
-  const { state, dispatch } = useCart(); // Acesse o estado e o dispatch do carrinho
+  const { state, dispatch } = useCart(); 
 
   const handleAddItem = () => {
     dispatch({ type: "ADD_ITEM", produto });
-    setCartItemQuantity(CartItemQuantity + 1); // Atualiza a quantidade local
+    setCartItemQuantity(CartItemQuantity + 1); 
   };
 
   const handleRemoveItem = () => {
     if (CartItemQuantity > 0) {
       dispatch({ type: "UPDATE_ITEM", produtoId: produto.id, quantidade: CartItemQuantity - 1 });
-      setCartItemQuantity(CartItemQuantity - 1); // Atualiza a quantidade local
+      setCartItemQuantity(CartItemQuantity - 1); 
     }
   };
 
