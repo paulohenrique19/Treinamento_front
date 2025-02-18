@@ -4,6 +4,7 @@ import { DefaultLayout } from './layouts/DefaultLayout'
 
 import { Home } from './pages/Home/index.tsx'
 import { Payment } from './pages/Payment/index.tsx'
+import { End } from './pages/End/index.tsx'
 
 export function Router() {
     return (
@@ -11,6 +12,7 @@ export function Router() {
         <Route path="/" element={<DefaultLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/payment" element={<Payment />} />
+          <Route path="/end" element= {<End />}/>
         </Route>
       </Routes>
     )

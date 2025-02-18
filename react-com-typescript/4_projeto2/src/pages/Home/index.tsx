@@ -3,12 +3,14 @@ import { CoffeeList } from "./components/CoffeeList"
 
 
 import { Produto } from "../../interfaces/Produto"
+import { DolarRealtime } from "../../api/dolarRealtime";
+import { useState } from "react";
 
 const produtos: Produto[] = [
     {
         id: 1,
         nome: "Expresso Tradicional",
-        preco: 9.99,
+        preco: 2.00,
         imagemUrl: "src/assets/images/Coffees/expresso_tradicional.svg",
         quantidade: 1,
         descricao: "O tradicional café feito com água quente e grãos moídos",
@@ -17,7 +19,7 @@ const produtos: Produto[] = [
     {
         id: 2,
         nome: "Expresso Americano",
-        preco: 12.50,
+        preco: 2.00,
         imagemUrl: "src/assets/images/Coffees/expresso_americano.svg",
         quantidade: 1,
         descricao: "Expresso diluído, menos intenso que o tradicional",
@@ -26,7 +28,7 @@ const produtos: Produto[] = [
     {
         id: 3,
         nome: "Expresso Cremoso",
-        preco: 11.00,
+        preco: 3.00,
         imagemUrl: "src/assets/images/Coffees/expresso_cremoso.svg",
         quantidade: 1,
         descricao: "Café expresso tradicional com espuma cremosa",
@@ -35,7 +37,7 @@ const produtos: Produto[] = [
     {
         id: 4,
         nome: "Expresso Gelado",
-        preco: 10.30,
+        preco: 3.00,
         imagemUrl: "src/assets/images/Coffees/expresso_gelado.svg",
         quantidade: 1,
         descricao: "Bebida preparada com café expresso e cubos de gelo",
@@ -44,7 +46,7 @@ const produtos: Produto[] = [
     {
         id: 5,
         nome: "Café com Leite",
-        preco: 8.50,
+        preco: 3.00,
         imagemUrl: "src/assets/images/Coffees/cafe_com_leite.svg",
         quantidade: 1,
         descricao: "Meio a meio de expresso tradicional com leite vaporizado",
@@ -53,7 +55,7 @@ const produtos: Produto[] = [
     {
         id: 6,
         nome: "Latte",
-        preco: 11.50,
+        preco: 3.00,
         imagemUrl: "src/assets/images/Coffees/latte.svg",
         quantidade: 1,
         descricao: "Uma dose de café expresso com o dobro de leite e espuma cremosa", 
@@ -62,7 +64,7 @@ const produtos: Produto[] = [
     {
         id: 7,
         nome: "Capuccino",
-        preco: 11.50,
+        preco: 3.00,
         imagemUrl: "src/assets/images/Coffees/capuccino.svg",
         quantidade: 1,
         descricao: "Bebida com canela feita de doses iguais de café, leite e espuma",
@@ -71,7 +73,7 @@ const produtos: Produto[] = [
     {
         id: 8,
         nome: "Macchiato",
-        preco: 11.50,
+        preco: 3.00,
         imagemUrl: "src/assets/images/Coffees/macchiato.svg",
         quantidade: 1,
         descricao: "Café expresso misturado com um pouco de leite quente e espuma",
@@ -80,7 +82,7 @@ const produtos: Produto[] = [
     {
         id: 9,
         nome: "Mocaccino",
-        preco: 11.50,
+        preco: 3.00,
         imagemUrl: "src/assets/images/Coffees/mocaccino.svg",
         quantidade: 1,
         descricao: "Café expresso com calda de chocolate, pouco leite e espuma",
@@ -89,7 +91,7 @@ const produtos: Produto[] = [
     {
         id: 10,
         nome: "Chocolate Quente",
-        preco: 11.50,
+        preco: 3.00,
         imagemUrl: "src/assets/images/Coffees/chocolate_quente.svg",
         quantidade: 1,
         descricao: "Bebida feita com chocolate dissolvido no leite quente e café",
@@ -98,7 +100,7 @@ const produtos: Produto[] = [
     {
         id: 11,
         nome: "Cubano",
-        preco: 11.50,
+        preco: 3.00,
         imagemUrl: "src/assets/images/Coffees/cubano.svg",
         quantidade: 1,
         descricao: "Drink gelado de café expresso com rum, creme de leite e hortelã",
@@ -107,7 +109,7 @@ const produtos: Produto[] = [
     {
         id: 12,
         nome: "Havaiano",
-        preco: 11.50,
+        preco: 3.00,
         imagemUrl: "src/assets/images/Coffees/havaiano.svg",
         quantidade: 1,
         descricao: "Bebida adocicada preparada com café e leite de coco",
@@ -116,7 +118,7 @@ const produtos: Produto[] = [
     {
         id: 13,
         nome: "Árabe",
-        preco: 11.50,
+        preco: 3.00,
         imagemUrl: "src/assets/images/Coffees/arabe.svg",
         quantidade: 1,
         descricao: "Bebida preparada com grãos de café árabe e especiarias",
@@ -125,7 +127,7 @@ const produtos: Produto[] = [
     {
         id: 14,
         nome: "Irlandes",
-        preco: 11.50,
+        preco: 3.50,
         imagemUrl: "src/assets/images/Coffees/irlandes.svg",
         quantidade: 1,
         descricao: "Bebida a base de café, uísque irlandês, açúcar e chantilly",
@@ -135,10 +137,22 @@ const produtos: Produto[] = [
 
 
 export const Home = () => {
+    const [dolarValue, setDolarValue] = useState<number | null>(null);
+  
+    const handleDolarChange = (value: number) => {
+      setDolarValue(value);
+    };
+  
+    const produtosComPrecoConvertido = produtos.map(produto => {
+      const precoConvertido = dolarValue ? produto.preco * dolarValue : produto.preco;
+      return { ...produto, precoConvertido };
+    });
+  
     return (
-    <div>
+      <div>
+        <DolarRealtime onDolarChange={handleDolarChange} />
         <Section />
-        <CoffeeList produtos={produtos}/>
-    </div>
-    )
-}
+        <CoffeeList produtos={produtosComPrecoConvertido} />
+      </div>
+    );
+  };

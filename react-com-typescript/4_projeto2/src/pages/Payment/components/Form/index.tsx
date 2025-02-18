@@ -2,25 +2,43 @@ import { useCart } from "../../../../contexts/CartContext";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Container, FormContainer, Input, Button, CartContainer, CartItem } from "./styles";
+import { Container, FormContainer, Input, Button, CartContainer, CartItem, Separator } from "./styles";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+// Enum para representar as formas de pagamento
+enum PaymentMethod {
+  CASH = 1,
+  CREDIT_DEBIT_CARD = 2,
+  PIX = 3,
+}
 
 export const AddressSchema = z.object({
   nome: z.string().min(1, "Nome é obrigatório"),
   rua: z.string().min(1, "Rua é obrigatória"),
   cidade: z.string().min(1, "Cidade é obrigatória"),
   cep: z.string().min(1, "CEP é obrigatório"),
+  formaPagamento: z.nativeEnum(PaymentMethod, {
+    errorMap: () => ({ message: "Forma de pagamento é obrigatória" }),
+  }),
 });
 
 export type AddressFormData = z.infer<typeof AddressSchema>;
 
-export const FormAddress = () => {
-  const { state, dispatch } = useCart();
-    const [cartQuantities, setCartQuantities] = useState<{ [key: string]: number }>({});
 
-  const { register, handleSubmit, formState: { errors } } = useForm<AddressFormData>({
+export const handleOnSubmit = (data: AddressFormData) => {
+  console.log("Dados do formulário:", data);
+};
+
+
+export const  FormAddress = () => {
+  const { state, dispatch } = useCart();
+  const [cartQuantities, setCartQuantities] = useState<{ [key: string]: number }>({});
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm<AddressFormData>({
     resolver: zodResolver(AddressSchema),
   });
+
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod | null>(null); 
 
   useEffect(() => {
     const initialQuantities: { [key: string]: number } = {};
@@ -28,10 +46,22 @@ export const FormAddress = () => {
       initialQuantities[item.produto.id] = item.quantidade;
     });
     setCartQuantities(initialQuantities);
-  }, [state.items]);  
+  }, [state.items]);
 
-  const onSubmit = (data: AddressFormData) => {
-    console.log("Endereço enviado: ", data);
+  const navigate = useNavigate();
+
+  const handleOnSubmit = (data: AddressFormData) => {
+    const hasErrors = Object.keys(errors).length > 0;
+  
+    if (!hasErrors) {
+      localStorage.setItem("endereco", JSON.stringify(data));
+      console.log("Dados do formulário:", data);
+      console.log("Forma de pagamento selecionada:", data.formaPagamento);
+  
+      navigate("/end"); 
+    } else {
+      console.log("Erro(s) no formulário:", errors);
+    }
   };
 
   const handleAddItem = (item: any) => {
@@ -48,19 +78,25 @@ export const FormAddress = () => {
     } else {
       dispatch({ type: "UPDATE_ITEM", produtoId: item.produto.id, quantidade: cartQuantities[item.produto.id] - 1 });
     }
-  
+
     setCartQuantities((prevQuantities) => ({
       ...prevQuantities,
       [item.produto.id]: (prevQuantities[item.produto.id] || 0) - 1,
     }));
   };
+
+  const handlePaymentSelect = (method: PaymentMethod) => {
+    setPaymentMethod(method);
+    setValue("formaPagamento", method); 
+  };
+
   
 
   return (
     <Container>
       <FormContainer>
         <h2>Endereço de Entrega</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(handleOnSubmit)}>
           <Input
             type="text"
             placeholder="Nome Completo"
@@ -89,6 +125,30 @@ export const FormAddress = () => {
           />
           {errors.cep && <span>CEP é obrigatório</span>}
 
+          <Separator>
+            <Button
+              type="button"
+              onClick={() => handlePaymentSelect(PaymentMethod.CASH)}
+              style={{ backgroundColor: paymentMethod === PaymentMethod.CASH ? "#007BFF" : "#ccc" }}
+            >
+              Dinheiro
+            </Button>
+            <Button
+              type="button"
+              onClick={() => handlePaymentSelect(PaymentMethod.CREDIT_DEBIT_CARD)}
+              style={{ backgroundColor: paymentMethod === PaymentMethod.CREDIT_DEBIT_CARD ? "#007BFF" : "#ccc" }}
+            >
+              Cartão de Crédito/Débito
+            </Button>
+            <Button
+              type="button"
+              onClick={() => handlePaymentSelect(PaymentMethod.PIX)}
+              style={{ backgroundColor: paymentMethod === PaymentMethod.PIX ? "#007BFF" : "#ccc" }}
+            >
+              Pix
+            </Button>
+            {errors.formaPagamento && <span>Forma de pagamento é obrigatória</span>}
+          </Separator>
           <Button type="submit">Confirmar Endereço</Button>
         </form>
       </FormContainer>

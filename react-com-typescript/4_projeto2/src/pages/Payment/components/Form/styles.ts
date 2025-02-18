@@ -123,3 +123,7 @@ export const Button = styled.button`
   margin-top: 1rem;
 `;
 
+export const Separator = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
