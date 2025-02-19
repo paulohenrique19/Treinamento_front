@@ -27,24 +27,24 @@ form.addEventListener("submit", (event) => {
 
 
     if (select_op == "USD") {
-        description.textContent = "US$ 1 = R$ 4,86"
-        result_convert.textContent = `${result} Reais`
+        description.textContent = "US$ 1 = R$ 5,82"
+        result_convert.textContent = `R$ ${result}`
     }
     if (select_op == "EUR") {
         description.textContent = "€EUR 1 = R$ 6,89"    
-        result_convert.textContent = `${result} Reais`
+        result_convert.textContent = `R$ ${result}`
     }
     if (select_op == "GBP") {
         description.textContent = "£GBP 1 = R$ 7,32" 
-        result_convert.textContent = `${result} Reais`
+        result_convert.textContent = `$R$ ${result}`
     }
     if (select_op == "CNY") {
         description.textContent = "CN¥ 1 = R$ 0,80" 
-        result_convert.textContent = `${result} Reais`
+        result_convert.textContent = `$R$ ${result} `
     }
     if (select_op == "JPY") {
         description.textContent = "JP¥ 1 = R$ 0,038" 
-        result_convert.textContent = `${result} Reais`
+        result_convert.textContent = `R$ ${result} `
     }
 
     footer.style.display = "block"
