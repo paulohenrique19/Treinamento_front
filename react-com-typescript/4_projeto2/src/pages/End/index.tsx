@@ -2,7 +2,7 @@ import { Container, Data } from "./styles";
 
 export const End = () => {
     const endereco = JSON.parse(localStorage.getItem("endereco") || "{}");
-
+    
 
     const typePagament = (value: any) => {
 
@@ -27,16 +27,16 @@ export const End = () => {
             )
         }
     }
-
+    
     return (
       <Container>
         <h2>Endereço de Entrega</h2>
         <Data>
-            <p><strong>Nome:</strong> {endereco.nome}</p>
-            <p><strong>Rua:</strong> {endereco.rua}</p>
-            <p><strong>Cidade:</strong> {endereco.cidade}</p>
-            <p><strong>CEP:</strong> {endereco.cep}</p>
-            <p><strong>Forma de pagamento:</strong> {typePagament(endereco.formaPagamento)}</p>
+            <p>Nome: <strong> {endereco.nome}</strong></p>
+            <p>Entrega em: <strong> {endereco.rua}</strong></p>
+            <p>Cidade: <strong> {endereco.cidade}</strong></p>
+            <p>CEP: <strong> {endereco.cep}</strong></p>
+            <p>Forma de pagamento: <strong>{typePagament(endereco.formaPagamento)}</strong></p>
         </Data>
       </Container>
     );
