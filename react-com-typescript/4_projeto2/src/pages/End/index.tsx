@@ -1,4 +1,4 @@
-import { Container, Data } from "./styles";
+import { Container, Data, Separator, Image } from "./styles";
 
 export const End = () => {
     const endereco = JSON.parse(localStorage.getItem("endereco") || "{}");
@@ -31,13 +31,17 @@ export const End = () => {
     return (
       <Container>
         <h2>Endereço de Entrega</h2>
-        <Data>
-            <p>Nome: <strong> {endereco.nome}</strong></p>
-            <p>Entrega em: <strong> {endereco.rua}</strong></p>
-            <p>Cidade: <strong> {endereco.cidade}</strong></p>
-            <p>CEP: <strong> {endereco.cep}</strong></p>
-            <p>Forma de pagamento: <strong>{typePagament(endereco.formaPagamento)}</strong></p>
-        </Data>
+        <Separator>
+            <Data>
+                <p>Entrega em: <strong> {endereco.rua}</strong></p>
+                <p><strong> {endereco.cidade}</strong></p>
+                <p>CEP: <strong> {endereco.cep}</strong></p>
+                <p>Forma de pagamento: <strong>{typePagament(endereco.formaPagamento)}</strong></p>
+            </Data>
+            <Image>
+                <img src="src/assets/images/End/Motorcycle.svg" alt="" />
+            </Image>
+        </Separator>
       </Container>
     );
   };
