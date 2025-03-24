@@ -3,6 +3,7 @@ import { SearchFormContainer } from "./styles";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useManageTransactions } from "../../../../hooks/useManageTransactions";
 
 const searchFormSchema = z.object({
   query: z.string(),
@@ -19,8 +20,11 @@ export function SearchForm() {
     resolver: zodResolver(searchFormSchema),
   });
 
+  const { searchTransactions } = useManageTransactions(2); 
+
   function handleSearchTransaction(data: SearchFormInputs) {
-    console.log(data);
+    
+    searchTransactions(data.query); 
   }
 
   return (
@@ -31,7 +35,6 @@ export function SearchForm() {
         {...register("query")}
       />
 
-      {/**Desabilita o botão quando estiver enviando */}
       <button type="submit" disabled={isSubmitting}>
         <MagnifyingGlass size={20} />
         Buscar

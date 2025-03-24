@@ -1,53 +1,28 @@
 import { Header } from "../../components/Header";
 import { Summary } from "../../components/Summary";
 import { SearchForm } from "./components/SearchForm";
-import { useManageTransactions } from "../../hooks/useManageTransactions ";
-
-import {
-  PriceHighLight,
-  TransactionsContainer,
-  TransactionsTable,
-} from "./styles";
+import { useManageTransactions } from "../../hooks/useManageTransactions";
+import { PriceHighLight, TransactionsContainer, TransactionsTable } from "./styles";
 import { dateFormatter, priceFormatter } from "../../utils/formatter";
 
 export function Transactions() {
-  const {
-    data: transactions,
-    //isLoading,
-    //isError,
-    //error,
-  } = useManageTransactions(1);
-  //   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
-  // na linha de baixo, mudamos o nome data para transactions, NÃO É TIPAGEM!
-  /*
-  const { data: transactions } = useQuery({
-    queryKey: ["transactions"],
-    queryFn: () => {
-      return axios
-        .get<TransactionArray>("http://localhost:3000/transactions")
-        .then((response) => response.data);
-    },
-  });
-  */
+  // Use o hook para carregar todas as transações inicialmente
+  const { data: transactions } = useManageTransactions(1);
 
-  //   useEffect(() => {
-  //     if (data) {
-  //       setTransactions(data);
-  //     }
-  //   }, [data]);
+
 
   return (
     <div>
       <Header />
-      <Summary transactions={transactions ?? []} />
+      {/*<Summary transactions={filteredTransactions ?? []} />*/}
 
       <TransactionsContainer>
-        <SearchForm />
+        <SearchForm /> {/* Componente de busca */}
 
         <TransactionsTable>
           <tbody>
-            {transactions?.map((transaction) => {
+            {transactions?.map((transaction: any) => {
               return (
                 <tr key={transaction.id}>
                   <td width="50%">{transaction.description}</td>
