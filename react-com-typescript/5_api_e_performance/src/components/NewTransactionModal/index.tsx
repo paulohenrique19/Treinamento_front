@@ -1,5 +1,4 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import * as RadioGroup from "@radix-ui/react-radio-group";
 import { CloseButton, 
         Content, 
         Overlay, 
@@ -27,12 +26,12 @@ export function NewTransactionModel() {
                     <input type="text" placeholder="Categoria" required/>
 
                     <TransactionType>
-                        <TransactionTypeButton variant="income" value="income">
+                        <TransactionTypeButton variant="income">
                             <ArrowCircleUp size={24}/>
                             Entrada
                         </TransactionTypeButton>
 
-                        <TransactionTypeButton variant="outcome" value="outcome">
+                        <TransactionTypeButton variant="outcome">
                             <ArrowCircleDown size={24}/>
                             Saída
                         </TransactionTypeButton>
