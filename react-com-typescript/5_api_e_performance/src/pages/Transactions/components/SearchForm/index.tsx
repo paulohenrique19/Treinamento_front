@@ -3,15 +3,19 @@ import { SearchFormContainer } from "./styles";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useManageTransactions } from "../../../../hooks/useManageTransactions";
 
+// Validação do formulário de busca
 const searchFormSchema = z.object({
-  query: z.string().min(1, "A busca deve ter ao menos 1 caractere"), 
+  query: z.string().min(1, "A busca deve ter ao menos 1 caractere"),
 });
 
 type SearchFormInputs = z.infer<typeof searchFormSchema>;
 
-export function SearchForm() {
+interface SearchFormProps {
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>; 
+}
+
+export function SearchForm({ setSearchQuery }: SearchFormProps) {
   const {
     register,
     handleSubmit,
@@ -20,10 +24,9 @@ export function SearchForm() {
     resolver: zodResolver(searchFormSchema),
   });
 
-  const { searchTransactionsFn } = useManageTransactions(); 
-
+  
   function handleSearchTransaction(data: SearchFormInputs) {
-    searchTransactionsFn(data.query);
+    setSearchQuery(data.query); 
   }
 
   return (

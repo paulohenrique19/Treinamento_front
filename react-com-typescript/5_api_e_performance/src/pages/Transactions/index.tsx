@@ -4,9 +4,12 @@ import { SearchForm } from "./components/SearchForm";
 import { useManageTransactions } from "../../hooks/useManageTransactions";
 import { PriceHighLight, TransactionsContainer, TransactionsTable } from "./styles";
 import { dateFormatter, priceFormatter } from "../../utils/formatter";
+import { useState } from "react";
 
 export function Transactions() {
-  const { transactions, isLoading, isError } = useManageTransactions(); 
+  const [searchQuery, setSearchQuery] = useState(""); // Gerenciar o estado da pesquisa
+  
+  const { transactions, isLoading, isError } = useManageTransactions(searchQuery); // Passando searchQuery para o hook
 
   if (isLoading) {
     return <div>Carregando...</div>;
@@ -22,7 +25,7 @@ export function Transactions() {
       <Summary transactions={transactions ?? []} />
 
       <TransactionsContainer>
-        <SearchForm />
+        <SearchForm setSearchQuery={setSearchQuery} />
 
         <TransactionsTable>
           <tbody>

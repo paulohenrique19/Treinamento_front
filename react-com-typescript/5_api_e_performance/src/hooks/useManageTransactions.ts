@@ -7,46 +7,41 @@ const fetchTransactions = async (): Promise<TransactionArray> => {
     .get<TransactionArray>("http://localhost:3000/transactions")
     .then((response) => response.data)
     .catch(() => []); 
-  console.log("Resposta", response);
   return response;
 };
 
 const searchTransactions = async (searchQuery: string): Promise<TransactionArray> => {
-
-  console.log("Query string: ", searchQuery)
   const response = await axios
     .get<TransactionArray>(`http://localhost:3000/transactions?description=${searchQuery}`)
     .then((response) => response.data)
     .catch(() => []); 
-  console.log("Resposta da busca", response);
   return response;
 };
 
-export const useManageTransactions = () => {
+export const useManageTransactions = (searchQuery: string) => {
   const {
     data,
     isLoading,
     isError,
     refetch,
   } = useQuery<TransactionArray>({
-    queryKey: ["transactions"], 
-    queryFn: fetchTransactions, 
+    queryKey: ["transactions", searchQuery || "all"], 
+    queryFn: () => {
+      if (!searchQuery) {
+        return fetchTransactions(); 
+      }
+      return searchTransactions(searchQuery); 
+    },
+    enabled: true,
   });
 
   const transactions = data;
-  
-
-  const searchTransactionsFn = (searchQuery: string) => {
-    return searchTransactions(searchQuery); 
-  };
-
-  
+ 
 
   return {
     transactions,
     isLoading,
     isError,
-    searchTransactionsFn, 
     refetch,
   };
   
