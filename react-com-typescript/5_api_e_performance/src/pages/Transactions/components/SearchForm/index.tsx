@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useManageTransactions } from "../../../../hooks/useManageTransactions";
 
 const searchFormSchema = z.object({
-  query: z.string(),
+  query: z.string().min(1, "A busca deve ter ao menos 1 caractere"), 
 });
 
 type SearchFormInputs = z.infer<typeof searchFormSchema>;
@@ -20,11 +20,10 @@ export function SearchForm() {
     resolver: zodResolver(searchFormSchema),
   });
 
-  const { searchTransactions } = useManageTransactions(2); 
+  const { searchTransactionsFn } = useManageTransactions(); 
 
   function handleSearchTransaction(data: SearchFormInputs) {
-    
-    searchTransactions(data.query); 
+    searchTransactionsFn(data.query);
   }
 
   return (
@@ -34,7 +33,6 @@ export function SearchForm() {
         placeholder="Busque por transações"
         {...register("query")}
       />
-
       <button type="submit" disabled={isSubmitting}>
         <MagnifyingGlass size={20} />
         Buscar

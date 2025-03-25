@@ -6,23 +6,27 @@ import { PriceHighLight, TransactionsContainer, TransactionsTable } from "./styl
 import { dateFormatter, priceFormatter } from "../../utils/formatter";
 
 export function Transactions() {
+  const { transactions, isLoading, isError } = useManageTransactions(); 
 
-  // Use o hook para carregar todas as transações inicialmente
-  const { data: transactions } = useManageTransactions(1);
+  if (isLoading) {
+    return <div>Carregando...</div>;
+  }
 
-
+  if (isError) {
+    return <div>Ocorreu um erro ao carregar as transações.</div>;
+  }
 
   return (
     <div>
       <Header />
-      {/*<Summary transactions={filteredTransactions ?? []} />*/}
+      <Summary transactions={transactions ?? []} />
 
       <TransactionsContainer>
-        <SearchForm /> {/* Componente de busca */}
+        <SearchForm />
 
         <TransactionsTable>
           <tbody>
-            {transactions?.map((transaction: any) => {
+            {transactions?.map((transaction) => {
               return (
                 <tr key={transaction.id}>
                   <td width="50%">{transaction.description}</td>
