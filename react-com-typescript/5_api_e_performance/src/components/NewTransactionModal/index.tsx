@@ -11,6 +11,7 @@ import {
 import { ArrowCircleDown, ArrowCircleUp, X } from "phosphor-react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTransactionMutate } from "../../hooks/useTransactionMutate";
 
 const newTransactionFormSchema = z.object({
   description: z.string(),
@@ -27,6 +28,7 @@ export function NewTransactionModel() {
     register,
     handleSubmit,
     formState: { isSubmitting },
+    reset
   } = useForm<NewTransactionFormInputs>({
     resolver: zodResolver(newTransactionFormSchema),
     defaultValues: {
@@ -34,10 +36,24 @@ export function NewTransactionModel() {
     },
   });
 
-  function handleCreateNewTransaction(data: NewTransactionFormInputs) {
-    console.log(data);
-  }
+  const { mutate, isSuccess } = useTransactionMutate();
 
+
+
+  function handleCreateNewTransaction(data: NewTransactionFormInputs) {
+
+
+    mutate({
+      description: data.description,
+      price: data.price,
+      category: data.category,
+      type: data.type,
+      createdAt: new Date(), // Adapte conforme necessário
+    });
+
+    reset()
+  }
+  
   return (
     <Dialog.Portal>
       <Overlay />
@@ -102,3 +118,7 @@ export function NewTransactionModel() {
     </Dialog.Portal>
   );
 }
+function formatDateToDDMMYYYY(currentDate: Date) {
+  throw new Error("Function not implemented.");
+}
+
