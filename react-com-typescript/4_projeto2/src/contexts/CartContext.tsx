@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useReducer, ReactNode } from "react";
+import React, { createContext, useContext, useReducer, ReactNode, useState, useEffect } from "react";
 import { Produto } from "../interfaces/Produto";
+import { Localizacao } from "../interfaces/Localizacao";
 
 interface CartItem {
   produto: Produto;
@@ -85,14 +86,62 @@ const cartReducer = (state: CartState, action: Action): CartState => {
 const CartContext = createContext<{
   state: CartState;
   dispatch: React.Dispatch<Action>;
+  address: Localizacao | null;
 } | undefined>(undefined);
+
+
 
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
+
+  const [address, setAddress] = useState<Localizacao | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const apiKey = 'a2b4a6998ede4d98b16a6d8263b9bfdd'; 
+
+  useEffect(() => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+       ;
+          fetch(
+            `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKey}&language=pt&countrycode=BR`
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              const result = data.results[0];
+              if (result) {
+                const cidade = result.components.city || result.components.town || result.components.village;
+                const estado = result.components.state;
+
+                setAddress({ cidade, estado });
+
+              } else {
+                setError('Localização não encontrada.');
+              }
+            })
+            .catch((err) => {
+              setError('Erro ao consultar a API: ' + err.message);
+            });
+        },
+        (err) => {
+          setError('Erro ao obter a localização: ' + err.message);
+        }
+      );
+    } else {
+      setError('Geolocation não é suportado neste navegador.');
+    }
+  }, []);
+  
+
+
+
   return (
-    <CartContext.Provider value={{ state, dispatch }}>
+    <CartContext.Provider value={{ state, dispatch, address }}>
       {children}
     </CartContext.Provider>
   );

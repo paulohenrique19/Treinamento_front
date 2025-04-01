@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "dev:server": "json-server server.json -w"
+    "dev:server": "json-server --watch db.json --port 3000"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.3",

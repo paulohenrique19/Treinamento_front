@@ -133,6 +133,15 @@ const produtos: Produto[] = [
         descricao: "Bebida a base de café, uísque irlandês, açúcar e chantilly",
         categoria: ["Especial", "Alcoólico"]
     },
+    {
+        id: 15,
+        nome: "Irlandes especial",
+        preco: 0.5,
+        imagemUrl: "src/assets/images/Coffees/irlandes.svg",
+        quantidade: 1,
+        descricao: "Bebida a base de café, uísque irlandês, açúcar e creme de leite",
+        categoria: ["Especial", "Alcoólico", "Tradicional"]
+    },
 ];
 
 

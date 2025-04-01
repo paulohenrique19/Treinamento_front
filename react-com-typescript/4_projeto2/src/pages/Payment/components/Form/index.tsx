@@ -162,8 +162,8 @@ export const  FormAddress = () => {
               <p>{item.produto.nome}</p>
               <span>Quantidade: {cartQuantities[item.produto.id] || 0}</span> {/* Exibe a quantidade do item */}
               <span>R$ {item.produto.preco.toFixed(2)}</span>
-              <span onClick={() => handleAddItem(item)}>Adicionar</span>
-              <span onClick={() => handleRemoveItem(item)}>Remover</span>
+              <Button className="add" onClick={() => handleAddItem(item)}>Adicionar</Button>
+              <Button className="remove" onClick={() => handleRemoveItem(item)}>Remover</Button>
             </div>
           </CartItem>
         ))}

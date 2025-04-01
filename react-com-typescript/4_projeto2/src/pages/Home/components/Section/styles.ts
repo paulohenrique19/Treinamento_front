@@ -2,13 +2,15 @@ import styled from "styled-components";
 
 
 export const SectionContainer = styled.div`
-    width: auto;
-    max-width: 100%;
-    
-    background: rgb(255,254,239);
-    background: linear-gradient(0deg, rgba(255,254,239,1) 0%, rgba(251,243,255,1) 100%);
-
+  width: auto;
+  max-width: 100%;
+  
+  background: rgb(255,254,239);
+  background: linear-gradient(0deg, rgba(255,254,239,1) 0%, rgba(251,243,255,1) 100%);
+  
+  padding-top: 4rem; 
 `
+
 
 export const Limitator = styled.div`
     
