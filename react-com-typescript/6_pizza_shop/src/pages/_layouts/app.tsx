@@ -1,13 +1,15 @@
 import { Outlet } from "react-router-dom";
+import { Container } from "./styles/app_styles";
+import { Header } from "@/components/header";
 
 export function AppLayout() {
   return (
-    <div>
-      <h1>Header</h1>
+    <Container>
+      <Header />
 
       <div>
         <Outlet />
       </div>
-    </div>
+    </Container>
   );
 }

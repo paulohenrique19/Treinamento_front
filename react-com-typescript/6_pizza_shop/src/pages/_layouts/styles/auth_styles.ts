@@ -22,5 +22,5 @@ export const NameLogo = tw.span`
 `
 
 export const LoginContainer = tw.div`
-    flex flex-col items-center justify-center
+    flex flex-col items-center justify-center relative
 `
