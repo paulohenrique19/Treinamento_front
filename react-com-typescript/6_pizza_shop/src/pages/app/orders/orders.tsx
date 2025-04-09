@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Search } from "lucide-react";
+import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useEffect } from "react";
 import styled from "styled-components";
 import tw from "tailwind-styled-components";
+import OrderTableRow from "./order-table-row";
+import OrderTableFilters from "./order-table-filters";
+import Pagination from "@/components/pagination";
 
 const Orders = () => {
 
@@ -15,36 +15,33 @@ const Orders = () => {
 
   return (
     <Container>
-            <Description>Pedidos</Description>
             <FormContainer>
-                <Form>
-                    <Filters>Filtros</Filters>
-                    <InputForm placeholder="Nome do cliente"/>
-                </Form>
+                <Description>Pedidos</Description>
+                <OrderTableFilters />
                 <TableContainer>
                     <Table>
                         <TableHeader>
                             <TableRow>
-                                <TableHead></TableHead>
-                                <TableHead>Identificador</TableHead>
-                                <TableHead>Realizado há</TableHead>
-                                <TableHead>Status</TableHead>
+                                <TableHead className="w-[64px]"></TableHead>
+                                <TableHead className="w-[140px]">Identificador</TableHead>
+                                <TableHead className="w-[180px]">Realizado há</TableHead>
+                                <TableHead className="w-[140px]">Status</TableHead>
                                 <TableHead>Cliente</TableHead>
-                                <TableHead>Total do pedido</TableHead>
-                                <TableHead></TableHead>
-                                <TableHead></TableHead>
+                                <TableHead className="w-[140px]">Total do pedido</TableHead>
+                                <TableHead className="w-[164px]"></TableHead>
+                                <TableHead className="w-[132px]"></TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            <TableRow>
-                                <TableCell>
-                                    <Button variant="outline" size="xs">
-                                    </Button>
-                                </TableCell>
-                            </TableRow>
+                            {Array.from({ length: 10}).map((_, i) => {
+                                return <OrderTableRow key={i} />
+                            })}
                         </TableBody>
                     </Table>
                 </TableContainer>
+                
+                <Pagination pageIndex={0} totalCount={105} perPage={10}/>
+
 
             </FormContainer>
     </Container>
@@ -63,15 +60,6 @@ const Description = tw.h1`
 `
 const FormContainer = tw.div`
     space-y-2.5
-`
-const Form = tw.form`
-    flex items-center gap-2
-`
-const Filters = tw.span`
-    text-sm font-semibold
-`
-const InputForm = tw(Input)`
-    h-8 w-[320px]
 `
 const TableContainer = tw.div`
     border rounded-md
