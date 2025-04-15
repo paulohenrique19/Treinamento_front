@@ -30,7 +30,7 @@ export function Dashboard() {
         <RevenueChart />
         <PopularProductsChart />
       </ChartContainer>
-
+      
     </Container>
   );
 }
@@ -46,6 +46,9 @@ const Title = tw.h1`
 const CardContainer = tw.div`
   grid grid-cols-4 gap-4
 `
-const ChartContainer = tw.div`
-  grid grid-cols-9 gap-2
-`
+const ChartContainer = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem; 
+  margin-top: 1rem;
+`;

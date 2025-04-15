@@ -21,7 +21,7 @@ const data = [
 
 const RevenueChart = () => {
   return (
-    <Card className="col-span-6 mt-4">
+    <Card className="">
         <CardHeader className="flex-row items-center justify-between pb-8">
            <div className="space-y-1">
                 <CardTitle className="text-base font-medium">Receita no período</CardTitle>     
