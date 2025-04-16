@@ -2,32 +2,74 @@ import tw from "tailwind-styled-components"
 import { Button } from "./ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu"
 import { Building, ChevronDown, LogOut } from "lucide-react"
+import { useQuery } from "@tanstack/react-query"
+import { getProfile } from "@/api/get-profile"
+import { getManagedRestaurant } from "@/api/get-managed-restaurant"
+import { Skeleton } from "./ui/skeleton"
+import { Dialog, DialogTrigger } from "./ui/dialog"
+import { StoreProfileDialog } from "./store-profile-dialog"
 
 const AccountMenu = () => {
+
+    const { data: profile, isLoading: isLoadingProfile } = useQuery({
+        queryKey: ['profile'],
+        queryFn: getProfile,
+    })
+
+    const { data: managedRestaurant, isLoading: isLoadingManagedRestaurant } = useQuery({
+        queryKey: ['managed-restaurant'],
+        queryFn: getManagedRestaurant,
+    })
+
   return (
-    <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-           <ButtonTrigger variant="outline">
-            Pizza Shop 
-            <ChevronDownIcon />
-           </ButtonTrigger> 
-        </DropdownMenuTrigger>   
-        <DropdownMenuContentList align="end">
-            <DropdownMenuLabelItens>
-                <Name>Insert name here</Name>
-                <Email>aaaa@email.com</Email>
-            </DropdownMenuLabelItens>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-                <BuildingIcon />
-                <span>Perfil da loja</span>
-            </DropdownMenuItem>
-            <DropdownMenuItemStyled>
-                <LogOutIcon />
-                <span>Sair</span>
-            </DropdownMenuItemStyled>
-        </DropdownMenuContentList>
-    </DropdownMenu>
+    <Dialog>
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+            <ButtonTrigger variant="outline">
+                    {isLoadingManagedRestaurant ? (
+                        <Skeleton className="h-4 w-40"/>
+                    ): 
+                        managedRestaurant?.name
+                    }
+                <ChevronDownIcon />
+            </ButtonTrigger> 
+            </DropdownMenuTrigger>   
+            <DropdownMenuContentList align="end">
+                <DropdownMenuLabelItens>
+                    {isLoadingProfile ? (
+                        <div className="space-y-1.5">
+                            <Skeleton className="h-4 w-40" />
+                            <Skeleton className="h-3 w-24" />
+                        </div>
+                        ):(
+                        <>
+                            <Name>{profile?.name}</Name>
+                            <Email>{profile?.email}</Email>
+                        </>
+                        )
+                    }
+                </DropdownMenuLabelItens>
+                <DropdownMenuSeparator />
+                {/**DialogTrigger asChild: Faz com que o 
+                 * componente de cima assuma as propriedades
+                 * co componente de baixo sem perder 
+                 * a estilização
+                 */}
+                <DialogTrigger asChild>    
+                    <DropdownMenuItem>
+                        <BuildingIcon />
+                        <span>Perfil da loja</span>
+                    </DropdownMenuItem>
+                </DialogTrigger>
+                <DropdownMenuItemStyled>
+                    <LogOutIcon />
+                    <span>Sair</span>
+                </DropdownMenuItemStyled>
+            </DropdownMenuContentList>
+        </DropdownMenu>
+
+        <StoreProfileDialog />
+    </Dialog>
   )
 }
 
