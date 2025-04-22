@@ -14,11 +14,13 @@ const AccountMenu = () => {
     const { data: profile, isLoading: isLoadingProfile } = useQuery({
         queryKey: ['profile'],
         queryFn: getProfile,
+        staleTime: Infinity,
     })
 
     const { data: managedRestaurant, isLoading: isLoadingManagedRestaurant } = useQuery({
         queryKey: ['managed-restaurant'],
         queryFn: getManagedRestaurant,
+        staleTime: Infinity,
     })
 
   return (
@@ -51,8 +53,8 @@ const AccountMenu = () => {
                 </DropdownMenuLabelItens>
                 <DropdownMenuSeparator />
                 {/**DialogTrigger asChild: Faz com que o 
-                 * componente de cima assuma as propriedades
-                 * co componente de baixo sem perder 
+                 * componente assuma as propriedades
+                 * do componente de baixo sem perder 
                  * a estilização
                  */}
                 <DialogTrigger asChild>    
