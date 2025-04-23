@@ -2,14 +2,18 @@ import tw from "tailwind-styled-components"
 import { Button } from "./ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu"
 import { Building, ChevronDown, LogOut } from "lucide-react"
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import { getProfile } from "@/api/get-profile"
 import { getManagedRestaurant } from "@/api/get-managed-restaurant"
 import { Skeleton } from "./ui/skeleton"
 import { Dialog, DialogTrigger } from "./ui/dialog"
 import { StoreProfileDialog } from "./store-profile-dialog"
+import { signOut } from "@/api/sign-out"
+import { useNavigate } from "react-router-dom"
 
 const AccountMenu = () => {
+
+    const navigate = useNavigate()
 
     const { data: profile, isLoading: isLoadingProfile } = useQuery({
         queryKey: ['profile'],
@@ -21,6 +25,15 @@ const AccountMenu = () => {
         queryKey: ['managed-restaurant'],
         queryFn: getManagedRestaurant,
         staleTime: Infinity,
+    })
+
+    const { mutateAsync: signOutFn, isPending: isSignOut} = useMutation({
+        mutationFn: signOut,
+        onSuccess: () => {
+            //replace: true --> evita com que o usuário
+            // acabe voltando para a no
+            navigate('/sign-in', {replace : true})
+        }
     })
 
   return (
@@ -63,9 +76,11 @@ const AccountMenu = () => {
                         <span>Perfil da loja</span>
                     </DropdownMenuItem>
                 </DialogTrigger>
-                <DropdownMenuItemStyled>
-                    <LogOutIcon />
-                    <span>Sair</span>
+                <DropdownMenuItemStyled asChild disabled={isSignOut}>
+                    <button className="w-full" onClick={() => signOutFn()}>
+                        <LogOutIcon />
+                        <span>Sair</span>
+                    </button>  
                 </DropdownMenuItemStyled>
             </DropdownMenuContentList>
         </DropdownMenu>

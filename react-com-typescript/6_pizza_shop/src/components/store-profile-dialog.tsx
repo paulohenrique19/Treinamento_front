@@ -15,7 +15,7 @@ import { toast } from "sonner";
 
 const storeProfileSchema = z.object({
     name: z.string().min(1),
-    description: z.string(),
+    description: z.string().nullable(),
 })
 
 type StoreProfileSchema = z.infer<typeof storeProfileSchema>
@@ -41,20 +41,46 @@ export function StoreProfileDialog() {
         }
     })
 
-    const { mutateAsync: updateProfileFn} = useMutation({
-        mutationFn: updateProfile,
-        onSuccess(_, { name, description }) {
-            const cached = queryClient.getQueryData<GetManagedRestaurantResponse>(['managed-restaurant'])
+    function updateManagedRestaurantCache({
+        name,
+        description
+    }: StoreProfileSchema)
+    {
+        const cached = queryClient.getQueryData<GetManagedRestaurantResponse>([
+            'managed-restaurant'
+        ])
             
-            if (cached)
-            {
-                queryClient.setQueryData<GetManagedRestaurantResponse>(['managed-restaurant'], {
-                    ...cached, //mantém o que já existe
-                    name,
-                    description
+        if (cached) {
+            queryClient.setQueryData<GetManagedRestaurantResponse>(['managed-restaurant'], {
+                ...cached, //mantém o que já existe
+                name,
+                description
                 })
             }
-        }
+        
+        return { cached }
+    }
+
+
+    //função pra alterar o nome e a descrição
+    const { mutateAsync: updateProfileFn} = useMutation({
+        mutationFn: updateProfile,
+        onMutate({ name, description }) {
+            const { cached } = updateManagedRestaurantCache({ name, description })
+
+            return { previousProfile: cached }
+        },
+        /** 
+         * Pegamos o cached antes de chamar a função ali em cima para que em caso de erro
+         * conseguirmos retornar os dados prévios em onError()...
+         * 
+        */
+        onError(_, __, context) {
+            if (context?.previousProfile)
+            {
+                updateManagedRestaurantCache(context.previousProfile)
+            }
+        },
     })
 
     async function handleUpdateProfile(data: StoreProfileSchema) {

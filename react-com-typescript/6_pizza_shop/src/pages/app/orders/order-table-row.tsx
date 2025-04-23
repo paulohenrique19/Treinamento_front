@@ -5,7 +5,17 @@ import { ArrowRight, X, Search } from "lucide-react";
 import tw from "tailwind-styled-components";
 import OrderDetails from "./order-details";
 
-const OrderTableRow = () => {
+export interface OrderTableRowProps {
+  order: {
+        orderId: string;
+        createdAt: Date;
+        status: "pending" | "canceled" | "processing" | "delivering" | "delivered";
+        customerName: string;
+        total: number;
+  }  
+}
+
+const OrderTableRow = ({ order }: OrderTableRowProps) => {
   return (
     <TableRow>
       <TableCell>
@@ -21,17 +31,17 @@ const OrderTableRow = () => {
         </Dialog>
       </TableCell>
       <TableCell className="font-mono text-xs font-medium">
-        7sgu7fg74y283d
+        {order.orderId}
       </TableCell>
-      <TableCell className="text-muted-foreground">Há 15 minutos</TableCell>
+      <TableCell className="text-muted-foreground"></TableCell>
       <TableCell>
         <StatusContainer>
           <StatusConditionColor />
-          <StatusConditionText>Pendente</StatusConditionText>
+          <StatusConditionText>{order.status}</StatusConditionText>
         </StatusContainer>
       </TableCell>
-      <TableCell className="font-medium">Paulo Henrique</TableCell>
-      <TableCell className="font-medium">R$ 150,00</TableCell>
+      <TableCell className="font-medium">{order.customerName}</TableCell>
+      <TableCell className="font-medium">{order.total}</TableCell>
       <TableCell>
         <Button variant="outline" size={"xs"}>
           <ArrowRight className="h-3 w-3 mr-2" />
