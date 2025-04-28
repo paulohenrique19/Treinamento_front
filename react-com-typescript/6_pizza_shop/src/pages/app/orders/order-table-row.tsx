@@ -4,11 +4,15 @@ import { TableRow, TableCell } from "@/components/ui/table";
 import { ArrowRight, X, Search } from "lucide-react";
 import tw from "tailwind-styled-components";
 import OrderDetails from "./order-details";
+import { OrderStatus } from "@/components/order-status";
+
+import { formatDistanceToNow } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 
 export interface OrderTableRowProps {
   order: {
         orderId: string;
-        createdAt: Date;
+        createdAt: string;
         status: "pending" | "canceled" | "processing" | "delivering" | "delivered";
         customerName: string;
         total: number;
@@ -33,15 +37,20 @@ const OrderTableRow = ({ order }: OrderTableRowProps) => {
       <TableCell className="font-mono text-xs font-medium">
         {order.orderId}
       </TableCell>
-      <TableCell className="text-muted-foreground"></TableCell>
+      <TableCell className="text-muted-foreground">
+        {formatDistanceToNow(order.createdAt, {
+          locale: ptBR,
+          addSuffix: true
+        })}
+      </TableCell>
       <TableCell>
-        <StatusContainer>
-          <StatusConditionColor />
-          <StatusConditionText>{order.status}</StatusConditionText>
-        </StatusContainer>
+        <OrderStatus status={order.status}/>
       </TableCell>
       <TableCell className="font-medium">{order.customerName}</TableCell>
-      <TableCell className="font-medium">{order.total}</TableCell>
+      <TableCell className="font-medium">{order.total.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      })}</TableCell>
       <TableCell>
         <Button variant="outline" size={"xs"}>
           <ArrowRight className="h-3 w-3 mr-2" />
@@ -64,21 +73,7 @@ export default OrderTableRow;
 const OrderDetailsRead = tw.span`
     sr-only
 `
-const StatusContainer = tw.div`
-    flex items-center gap-2
-`
-const StatusConditionColor = tw.span`
-    h-2 w-2 rounded-full bg-slate-400
-` 
+
 const SearchIcon = tw(Search)`
     h-3 w-3
 `
-const StatusConditionText = tw.span`
-
-`
-
-/*
-interface StatusConditionColorProps {
-    variant: 'pendente' | 'andamento' | 'finalizado';
-}
-*/

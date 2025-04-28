@@ -5,11 +5,12 @@ import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-r
 export interface PaginationProps {
     pageIndex: number,
     totalCount: number,
-    perPage: number
+    perPage: number,
+    onPageChange: (pageIndex: number) => Promise<void> | void 
 }
 
 
-const Pagination = ({ pageIndex, totalCount, perPage}: PaginationProps) => {
+const Pagination = ({ pageIndex, totalCount, perPage, onPageChange}: PaginationProps) => {
     const pages = Math.ceil(totalCount / perPage) || 1
 
   return (
@@ -21,19 +22,19 @@ const Pagination = ({ pageIndex, totalCount, perPage}: PaginationProps) => {
         <PageList>
             <Page>Página {pageIndex + 1} de {pages}</Page>
             <ButtonsToNavigate>
-                <Button variant={"outline"} className="h-8 w-8 p-8">
+                <Button onClick={() => onPageChange(0)} variant={"outline"} className="h-8 w-8 p-8">
                     <ChevronsLeft className="h-4 w-4" />
                     <span className="sr-only">Primeira página</span>
                 </Button>
-                <Button variant={"outline"} className="h-8 w-8 p-8">
+                <Button onClick={() => (pageIndex > 0 ? onPageChange(pageIndex - 1) : onPageChange(0))} variant={"outline"} className="h-8 w-8 p-8">
                     <ChevronLeft className="h-4 w-4" />
                     <span className="sr-only">Página anterior</span>
                 </Button>
-                <Button variant={"outline"} className="h-8 w-8 p-8">
+                <Button onClick={() => (pageIndex < (pages - 1) ? onPageChange(pageIndex + 1) : onPageChange(pages - 1))} variant={"outline"} className="h-8 w-8 p-8">
                     <ChevronRight className="h-4 w-4" />
                     <span className="sr-only">Próxima página</span>
                 </Button>
-                <Button variant={"outline"} className="h-8 w-8 p-8">
+                <Button onClick={() => onPageChange(pages - 1)} variant={"outline"} className="h-8 w-8 p-8">
                     <ChevronsRight className="h-4 w-4" />
                     <span className="sr-only">última página</span>
                 </Button>
