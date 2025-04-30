@@ -1,6 +1,6 @@
 import tw from "tailwind-styled-components"
 
-type OrderStatus = 
+export type OrderStatus = 
     | 'pending'
     | 'canceled'
     | 'processing'

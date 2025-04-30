@@ -24,7 +24,7 @@ const Orders = () => {
 
   const { data: result } = useQuery({
     queryKey: ['orders', pageIndex, orderId, customerName, status],
-    queryFn: () => getOrders({ pageIndex, orderId, customerName, status }),
+    queryFn: () => getOrders({ pageIndex, orderId, customerName, status: status === 'all' ? null : status }),
   })
   
 

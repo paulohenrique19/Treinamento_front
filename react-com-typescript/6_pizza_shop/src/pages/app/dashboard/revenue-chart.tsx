@@ -1,4 +1,8 @@
+import { getDailyRevenueInPeriod } from "@/api/get-daily-revenue-in-period"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { DatePickerWithRange } from "@/components/ui/date-range-picker"
+import { Label } from "@/components/ui/label"
+import { useQuery } from "@tanstack/react-query"
 import { ResponsiveContainer, 
         LineChart, 
         XAxis, 
@@ -9,17 +13,16 @@ import { ResponsiveContainer,
 
 import colors from 'tailwindcss/colors'
 
-const data = [
-    { date: '10/12', revenue: 1200 },
-    { date: '11/12', revenue: 1500 },
-    { date: '12/12', revenue: 500 },
-    { date: '13/12', revenue: 900 },
-    { date: '14/12', revenue: 1700 },
-    { date: '15/12', revenue: 1500 },
-    { date: '16/12', revenue: 1300 }
-]
+
 
 const RevenueChart = () => {
+
+    const {data: dailyRevenueInPeriod} = useQuery({
+        queryKey: ['metrics', 'daily-revenue-in-period'],
+        queryFn: getDailyRevenueInPeriod
+    })
+
+
   return (
     <Card className="">
         <CardHeader className="flex-row items-center justify-between pb-8">
@@ -27,10 +30,16 @@ const RevenueChart = () => {
                 <CardTitle className="text-base font-medium">Receita no período</CardTitle>     
                 <CardDescription>Receita diária no período</CardDescription>       
            </div> 
+
+           <div className="flex items-center gap-3">
+                <Label>Período</Label>
+                <DatePickerWithRange />
+           </div>
         </CardHeader>
         <CardContent>
-            <ResponsiveContainer width="100%" height={240}>
-                <LineChart data={data}>
+            {dailyRevenueInPeriod && (
+                <ResponsiveContainer width="100%" height={240}>
+                <LineChart data={dailyRevenueInPeriod}>
                     <XAxis dataKey="date" 
                             tickLine={false} 
                             axisLine={false}
@@ -50,11 +59,12 @@ const RevenueChart = () => {
                     <CartesianGrid vertical={false} className="stroke-muted"/>
                     <Line type="linear" 
                             strokeWidth={2} 
-                            dataKey="revenue" 
+                            dataKey="receipt" 
                             stroke={colors.violet['500']}
                     />
                 </LineChart>
             </ResponsiveContainer>
+            )}
         </CardContent>
     </Card>
   )
