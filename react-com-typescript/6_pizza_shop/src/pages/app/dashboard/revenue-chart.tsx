@@ -3,6 +3,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { DatePickerWithRange } from "@/components/ui/date-range-picker"
 import { Label } from "@/components/ui/label"
 import { useQuery } from "@tanstack/react-query"
+import { useMemo, useState } from "react"
+import { DateRange } from "react-day-picker"
 import { ResponsiveContainer, 
         LineChart, 
         XAxis, 
@@ -10,18 +12,33 @@ import { ResponsiveContainer,
         CartesianGrid,
         Line,
         Tooltip} from 'recharts'
-
+import { subDays } from 'date-fns'
 import colors from 'tailwindcss/colors'
 
 
 
 const RevenueChart = () => {
+    const [dateRange, setDateRange] = useState<DateRange | undefined>({
+        from: subDays(new Date(), 7),
+        to: new Date()
+    })
 
     const {data: dailyRevenueInPeriod} = useQuery({
         queryKey: ['metrics', 'daily-revenue-in-period'],
-        queryFn: getDailyRevenueInPeriod
+        queryFn: () => getDailyRevenueInPeriod({
+            from: dateRange?.from,
+            to: dateRange?.to,
+        })
     })
 
+    const chartData = useMemo(() => {
+        return dailyRevenueInPeriod?.map(chartItem => {
+            return {
+                date: chartItem.date,
+                receipt: chartItem.receipt / 100
+            }
+        })
+    }, [dailyRevenueInPeriod])
 
   return (
     <Card className="">
@@ -33,13 +50,13 @@ const RevenueChart = () => {
 
            <div className="flex items-center gap-3">
                 <Label>Período</Label>
-                <DatePickerWithRange />
+                <DatePickerWithRange date={dateRange} onDateChange={setDateRange}/>
            </div>
         </CardHeader>
         <CardContent>
             {dailyRevenueInPeriod && (
                 <ResponsiveContainer width="100%" height={240}>
-                <LineChart data={dailyRevenueInPeriod}>
+                <LineChart data={chartData}>
                     <XAxis dataKey="date" 
                             tickLine={false} 
                             axisLine={false}
